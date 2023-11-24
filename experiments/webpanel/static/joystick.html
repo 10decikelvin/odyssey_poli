@@ -1,0 +1,213 @@
+
+<!--https://github.com/stemkoski/HTML-Joysticks kudos to this guy for writing the abse library on which is is designed-->
+<!-- The repo above was distributed under the MIT Licence, as the follwoing code does contain 'substantial portions' of the software-->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Joystick Controls</title>
+	<style>
+	body
+	{
+		font-family: Courier, monospaced;
+		font-size: 16px;
+		font-weight: bold;
+	}
+	</style>
+</head>
+
+<body>
+<div id="status" style="color: red;">Status...</div>
+<style>
+	:root{
+		--size: 40vw;
+		--knob-size: calc(var(--size) / 2);
+	}
+	html, body{
+		margin:0;
+		padding:0;
+	}
+	.container{
+		width: var(--size);
+		padding:0;
+		margin: 0;
+		aspect-ratio: 1;
+		display:inline-block;
+		position: absolute;
+		bottom: 0;
+		background: url("/static/assets/joystick-base.png");
+		background-size: 100% 100%;
+	}
+	#container-1{
+		left:0;
+	}
+	#container-2{
+		right:0;
+	}
+	.container .base{
+		width:100%;
+		height:100%;
+	}
+	.container .stick{
+		position: absolute;
+		top: calc(50% - var(--knob-size) / 2);
+		left: calc(50% - var(--knob-size) / 2);
+	}
+	.container .stick, .container .ball{
+		width:var(--knob-size);
+		height: var(--knob-size);
+	}
+</style>
+<hr>
+<div id="container-1" style="border: 1px solid red;" class="container">
+	<!--<img src="/static/assets/joystick-base.png" class="base"/>-->
+	<div class="stick" style="position: absolute;">
+	<img src="/static/assets/joystick-red.png" class="ball"/>		
+	</div>
+</div>
+
+<div id="container-2" style="border: 1px solid blue;" class="container">
+	<!--<img src="/static/assets/joystick-base.png" class="base"/>-->
+	<div class="stick" style="position: absolute;">
+	<img src="/static/assets/joystick-blue.png" class="ball"/>		
+	</div>
+</div>
+
+<script>
+
+class JoystickController{
+	
+	
+	constructor(container, size){
+		this.stick = container.querySelector(".stick");
+
+		
+
+		// maxDistance: maximum amount joystick can move in any direction
+		// deadzone: joystick must move at least this amount from origin to register value change
+		this.maxDistance = size/2;
+		this.deadzone = size/16;
+		this.stick.style.left = this.stick.style.top = size/4;
+		container.width = size;
+		container.height = size;
+
+		// location from which drag begins, used to calculate offsets
+		this.dragStart = null;
+		// track touch identifier in case multiple joysticks present
+		this.touchId = null;
+		this.active = false;
+		this.value = { x: 0, y: 0 };
+
+		this.stick.addEventListener('mousedown', (e) => this.handleDown(e));
+		this.stick.addEventListener('touchstart', (e) => this.handleDown(e));
+		document.addEventListener('mousemove', (e) => this.handleMove(e), {passive: false});
+		document.addEventListener('touchmove', (e) => this.handleMove(e), {passive: false});
+		document.addEventListener('mouseup', (e) => this.handleUp(e));
+		document.addEventListener('touchend', (e) => this.handleUp(e));
+	}
+	handleUp(event){
+		if ( !this.active ) return;
+
+		// if this is a touch event, make sure it is the right one
+		if (event.changedTouches && this.touchId != event.changedTouches[0].identifier) return;
+
+		// transition the joystick position back to center
+		this.stick.style.transition = '.2s';
+		this.stick.style.transform = `translate3d(0px, 0px, 0px)`;
+
+		// reset everything
+		this.value = { x: 0, y: 0 };
+		this.touchId = null;
+		this.active = false;
+	}
+	handleDown(event){
+		this.active = true;
+
+		// all drag movements are instantaneous
+		this.stick.style.transition = '0s';
+
+		// touch event fired before mouse event; prevent redundant mouse event from firing
+		event.preventDefault();
+
+		if (event.changedTouches)
+			this.dragStart = { x: event.changedTouches[0].clientX, y: event.changedTouches[0].clientY };
+		else
+			this.dragStart = { x: event.clientX, y: event.clientY };
+
+		// if this is a touch event, keep track of which one
+		if (event.changedTouches)
+			this.touchId = event.changedTouches[0].identifier;
+	}
+	handleMove(event) {
+		if ( !this.active ) return;
+
+		// if this is a touch event, make sure it is the right one
+		// also handle multiple simultaneous touchmove events
+		let touchmoveId = null;
+		if (event.changedTouches)
+		{
+			for (let i = 0; i < event.changedTouches.length; i++)
+			{
+				if (this.touchId == event.changedTouches[i].identifier)
+				{
+					touchmoveId = i;
+					event.clientX = event.changedTouches[i].clientX;
+					event.clientY = event.changedTouches[i].clientY;
+				}
+			}
+
+			if (touchmoveId == null) return;
+		}
+
+		const xDiff = event.clientX - this.dragStart.x;
+		const yDiff = event.clientY - this.dragStart.y;
+		const angle = Math.atan2(yDiff, xDiff);
+		const distance = Math.min(this.maxDistance, Math.hypot(xDiff, yDiff));
+		const xPosition = distance * Math.cos(angle);
+		const yPosition = distance * Math.sin(angle);
+
+		// move stick image to new position
+		this.stick.style.transform = `translate3d(${xPosition}px, ${yPosition}px, 0px)`;
+
+		// deadzone adjustment
+		const distance2 = (distance < this.deadzone) ? 0 : this.maxDistance / (this.maxDistance - this.deadzone) * (distance - this.deadzone);
+		const xPosition2 = distance2 * Math.cos(angle);
+		const yPosition2 = distance2 * Math.sin(angle);
+		const xPercent = parseFloat((xPosition2 / this.maxDistance).toFixed(4));
+		const yPercent = parseFloat((yPosition2 / this.maxDistance).toFixed(4));
+		
+		this.value = { x: xPercent, y: -yPercent };
+	}
+}
+let size = Math.min(innerHeight, innerWidth / 2) * 0.8;
+document.querySelector(':root').style.setProperty("--size", `${size}px`)
+
+let joystick1 = new JoystickController(document.querySelector("#container-1"), size);
+let joystick2 = new JoystickController(document.querySelector("#container-2"), size);
+
+
+function loop(){
+	// some bad polling code
+	if(Math.random() < 0.3){
+		document.getElementById("status").innerText = JSON.stringify(joystick1.value) + JSON.stringify(joystick2.value);
+	}
+	requestAnimationFrame(loop);
+}
+
+loop();
+
+let webSocket = new WebSocket("ws://"+ window.location.host);
+let lastLeft = 0;
+let lastRight = 0;
+setInterval(() => {
+	if(joystick1.value.y === lastLeft && joystick2.value.y === lastRight){
+		return;
+	}
+	lastLeft = joystick1.value.y;
+	lastRight = joystick2.value.y;
+	webSocket.send(JSON.stringify({left:lastLeft, right:lastRight}));
+}, 100)
+
+</script>
+
+</body>
+</html>

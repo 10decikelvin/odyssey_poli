@@ -1,0 +1,58 @@
+<canvas></canvas>
+<style>
+    body,html{
+        margin: 0;
+        padding:0;
+        width:100vw;
+        height:100vh;
+    }
+</style>
+
+<script>
+    const canvas = document.querySelector("canvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+
+    const targetFps = 20;
+    const maxConcurrentRequests = 40;
+
+    function getURL(){
+        return "/camera?q=" + Date.now();
+    }
+
+    let imgs = [];
+
+
+    function crawl(){
+        console.log("ok")
+        if(imgs.filter(c => c.state === "LOADING").length < maxConcurrentRequests){
+            //search for dormant elemtns
+            let dormant = imgs.find(cont => cont.state === "DORMANT");
+            let container;
+            if(dormant){
+                container = dormant
+            }else{
+                container = {
+                    state: "DORMANT",
+                    image: new Image()
+                }
+                imgs.push(container)
+            }
+            function onload(){
+                //recycle for future use
+                container.state = "DORMANT";
+                container.image.removeEventListener("load", onload);
+
+                ctx.drawImage(container.image, 0, 0);
+            }
+            container.state = "LOADING";
+            container.image.src = getURL();
+            container.image.addEventListener("load", onload);
+        }
+        setTimeout(() => crawl(), 1000/targetFps);
+    }
+
+    crawl();
+</script>

@@ -1,8 +1,18 @@
 {
   "dependencies": {
     "@serialport/parser-delimiter": "^12.0.0",
+    "@u4/opencv4nodejs": "^6.5.2",
     "serialport": "^12.0.0",
     "ws": "^8.14.2"
   },
-  "type": "module"
+  "type": "module",
+  "opencv4nodejs": {
+    "disableAutoBuild": "1",
+    "OPENCV_INCLUDE_DIR": "/usr/include/opencv4/",
+    "OPENCV_LIB_DIR": "/lib/aarch64-linux-gnu",
+    "OPENCV_BIN_DIR": "/usr/bin/"
+  },
+  "scripts": {
+    "dev": "node experiments/webpanel/server.js"
+  }
 }

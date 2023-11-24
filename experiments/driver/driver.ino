@@ -10,19 +10,18 @@ char command[maxCharLength] = {0};
 float param0 = 0.0;
 float param1 = 0.0;
 //motor pin definitions
-const int motorLA = 13;
-const int motorLB = 12;
-const int motorRA = 8;
-const int motorRB = 9;
+const int motorLA = 12;
+const int motorLB = 11;
+const int motorPWMLA = 10;
+const int motorPWMLB = 9;
 
-const int motorPWMLA = 11;
-const int motorPWMLB = 6;
-const int motorPWMRA = 10;
+const int motorRA = 7;
+const int motorRB = 4;
+const int motorPWMRA = 6;
 const int motorPWMRB = 5;
-const int Isense = 7;
 void setup() {
-    Serial.begin(9600);
-    Serial.println("Command format: <string, float, float>");
+    Serial.begin(115200);
+    Serial.println("AUTOPOWERCORRECT: ENABLED. Command format: <string, float, float>");
 
     //set pin mode
     pinMode(motorLA, OUTPUT);
@@ -33,9 +32,6 @@ void setup() {
     pinMode(motorPWMLB, OUTPUT);
     pinMode(motorPWMRA, OUTPUT);
     pinMode(motorPWMRB, OUTPUT);
-
-    pinMode(Isense, INPUT);
-
 }
 
 //============
@@ -64,7 +60,6 @@ void loop() {
           Serial.println("BRAKE: OK");
         }else if(strcmp("move", command) == 0){
           move(param0, param1);
-          Serial.println("MOVE: OK");
         }else if(strcmp("right", command) == 0){
           right(param0, param1);
           Serial.println("RIGHT: OK");
@@ -139,24 +134,36 @@ void brake(){
 bool move(float lspd, float rspd){
     if(lspd > 1 || lspd < -1) return false;
     if(rspd > 1 || rspd < -1) return false;
-    left(1.0, lspd);
-    right(1.0, rspd);
+
+    float corrected_lspd = speed2pwm1(lspd);
+    float corrected_rspd = speed2pwm2(rspd);
+    Serial.print("MOVE: OK; ");
+    Serial.print(lspd);
+    Serial.print(" ");
+    Serial.print(rspd);
+    Serial.print(" > ");
+    Serial.print(corrected_lspd);
+    Serial.print(" ");
+    Serial.println(corrected_rspd);
+
+    left(1.0, corrected_lspd);
+    right(1.0, corrected_rspd);
     return true;
 }
 
 void left(float enablePin, float spd){
   int pwm = abs(int(spd * MAX_SAFE_PWM_OUTPUT));
-  if(enablePin == 1.0){
-    digitalWrite(motorRA,1);
-    digitalWrite(motorRB,1);
-  }else{
+  if(enablePin == 0.0){
     digitalWrite(motorRA,0);
     digitalWrite(motorRB,0);
-  }
-  if(spd > 0){
+  }else if(spd < 0){
+    digitalWrite(motorRA,1);
+    digitalWrite(motorRB,1);
     analogWrite(motorPWMRA, pwm);
     analogWrite(motorPWMRB,0);
   }else{
+    digitalWrite(motorRA,1);
+    digitalWrite(motorRB, 1);
     analogWrite(motorPWMRA,0);
     analogWrite(motorPWMRB, pwm);
   }
@@ -164,18 +171,45 @@ void left(float enablePin, float spd){
 
 void right(float enablePin, float spd){
   int pwm = abs(int(spd * MAX_SAFE_PWM_OUTPUT));
-  if(enablePin == 1.0){
-    digitalWrite(motorLA,1);
-    digitalWrite(motorLB,1);
-  }else{
+  if(enablePin == 0.0){
     digitalWrite(motorLA,0);
     digitalWrite(motorLB,0);
-  }
-  if(spd > 0){
+  }else if(spd < 0){
+    digitalWrite(motorLA,1);
+    digitalWrite(motorLB,1);
     analogWrite(motorPWMLA, pwm);
     analogWrite(motorPWMLB,0);
   }else{
+    digitalWrite(motorLA,1);
+    digitalWrite(motorLB,1);
     analogWrite(motorPWMLA,0);
     analogWrite(motorPWMLB, pwm);
+  }
+}
+
+float clip(float x){
+  if(x>1){
+    return 1;
+  }
+  if(x<0){
+    return 0;
+  }
+  return x;
+}
+
+// converts a speed (0-1) to a corrected power rate (0-1) for motor 1
+float speed2pwm1(float desiredSpeed){
+  if(desiredSpeed > 0){
+    return clip(abs(desiredSpeed));
+  }else{
+    return -clip(abs(desiredSpeed));
+  }
+}
+
+float speed2pwm2(float desiredSpeed){
+  if(desiredSpeed > 0){
+    return clip(abs(desiredSpeed) * 0.878 - 0.094);
+  }else{
+    return -clip(abs(desiredSpeed) * 0.878 - 0.094);
   }
 }

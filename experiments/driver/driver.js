@@ -2,8 +2,8 @@ import { SerialPort }from 'serialport';
 import { DelimiterParser }from '@serialport/parser-delimiter';
 // Create a port
 let port = new SerialPort({
-  path: '/dev/ttyACM0',
-  baudRate: 9600
+  path: '/dev/ttyUSB0',
+  baudRate: 115200
 });
 
 const parser = port.pipe(new DelimiterParser({ delimiter: '\n' }));

@@ -26,7 +26,6 @@
 
 
     function crawl(){
-        console.log("ok")
         if(imgs.filter(c => c.state === "LOADING").length < maxConcurrentRequests){
             //search for dormant elemtns
             let dormant = imgs.find(cont => cont.state === "DORMANT");

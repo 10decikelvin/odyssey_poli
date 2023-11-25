@@ -24,5 +24,11 @@ gst-env.py
 
 ## List device capabilities
 ```
+
 v4l2-ctl --list-formats-ext -d /dev/video0
+```
+
+## Scan wifi
+```bash
+sudo nmcli device wifi rescan && sudo nmcli device wifi list
 ```

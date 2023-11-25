@@ -199,13 +199,19 @@ let webSocket = new WebSocket("ws://"+ window.location.host);
 let lastLeft = 0;
 let lastRight = 0;
 setInterval(() => {
-	if(joystick1.value.y === lastLeft && joystick2.value.y === lastRight){
+	let fwd = joystick1.value.y;
+	let motorCompensation = joystick2.value.x/2;
+	
+	let left = Math.max(-1, Math.min(1, fwd + motorCompensation));
+	let right = Math.max(-1, Math.min(1, fwd - motorCompensation));
+	if(left === lastLeft && right === lastRight){
+		//console.log("return")
 		return;
 	}
-	lastLeft = joystick1.value.y;
-	lastRight = joystick2.value.y;
+	lastLeft = left;
+	lastRight = right;
 	webSocket.send(JSON.stringify({left:lastLeft, right:lastRight}));
-}, 100)
+}, 10)
 
 </script>
 

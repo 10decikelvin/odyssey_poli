@@ -29,7 +29,7 @@ long int encoderPosition[2] = {0, 0}; // Stores last encoder positions L and R
 
 //ODO calcs=========================
 
-const float WHEEL_RATIO = 550; // encoder ticks per metre (0.00188496m/t)
+const float WHEEL_RATIO = 555; // encoder ticks per metre (0.00188496m/t)
 const float WHEELBASE = 0.37; // metres
 const float HALF_VEHICLE_WIDTH = WHEELBASE / 2; // metres
 
@@ -89,12 +89,12 @@ const int MIN_SPEED = 4; // 8 mm/s
 // ========== PID constants ==========
 const double KpL = 0.9;
 const double KiL = 0.8;
-const double KdL = 0.02;
+const double KdL = 0.03;
 const double biasL = 0;
 
-const double KpR = 0.8;
-const double KiR = 0.75;
-const double KdR = 0.02;
+const double KpR = 0.9;
+const double KiR = 0.8;
+const double KdR = 0.03;
 const double biasR = 0;
 // const double KpR = ;
 // const double KiR = 0.01;
@@ -103,7 +103,7 @@ const double biasR = 0;
 const long int TIME = 20000; // us/microseconds
 
 const float VELOCITY_ALPHA = 0.1;
-const float SETPOINT_ALPHA = 0.5;
+const float SETPOINT_ALPHA = 0.4;
 
 const int RESET_THRESHOLD = 40;
 const float DEST_THRESHOLD = 0.03;
@@ -131,9 +131,16 @@ unsigned long prevTimePID = 0;
 unsigned long currTimePID = 0;
 
 int driveData[3] = {0,0,0};
+
+
+/// CIRCLE TRACKING VARIABLES
 long int dt;
 long int dtCircle;
 long int prevCircleTime = 0;
+
+const float T = 3; // Time to get to target in seconds
+const long int CIRCLE_TIME = 500000;
+
 float dtL;
 float dtR;
 
@@ -150,10 +157,6 @@ int dataIndex = 0;
 const float KdpL = 0.32;
 const float KdpR = 0.29;
 const long int dumbTime = 500000;
-
-
-const float T = 3; //Time multiplier
-const long int circleTime = 500000;
 
 //const int ERROR_TOLERANCE = 2;
 
@@ -236,7 +239,7 @@ void loop() {
 
   dtCircle = (long)(micros() - prevCircleTime);
   
-  // if (dtCircle > circleTime) {
+  // if (dtCircle > CIRCLE_TIME) {
   //   targVel = circle_track(currPos, targPos, headingVec);
   // }
   

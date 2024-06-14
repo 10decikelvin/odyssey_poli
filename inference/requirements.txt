@@ -1,0 +1,7 @@
+numpy
+opencv-python
+pillow
+tensorflow==2.16.1
+flask
+gradio==3.50
+tqdm

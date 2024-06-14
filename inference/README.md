@@ -22,7 +22,7 @@ or if you want to specify the path to the model and the size of the input:
 python webcam_lsd.py --path /path/to/model --size 320
 ```
 
-`webcam_lsd.py` also supports the following arguments:
+`webcam_lsd.py` supports the following arguments:
 
 - `--path` to specify the path to the model file
 - `--size` size of the input (320 or 512)

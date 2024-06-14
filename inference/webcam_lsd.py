@@ -8,7 +8,7 @@ SCORE_THRESH = 0.15 # 0 to 1, 0 is most responsive
 DIST_THRESH = 20.0 # 0 to 20, how far away lines are detected from origin
 
 parser = argparse.ArgumentParser('webcam inference')
-parser.add_argument('--path', default='lsd.tflite', type=str, help='path to model')
+parser.add_argument('--path', default='model/lsd320.tflite', type=str, help='path to model')
 parser.add_argument('--size', default=320, type=int, choices=[512, 320], help='input size')
 args = parser.parse_args()
 

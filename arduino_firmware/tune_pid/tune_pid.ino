@@ -30,10 +30,9 @@ long int encoderPosition[2] = {0, 0}; // Stores last encoder positions L and R
 
 //ODO calcs=========================
 
-const float WHEEL_RATIO = 555; // encoder ticks per metre (0.00188496m/t)
-const float WHEELBASE = 0.36; // metres
+const float WHEEL_RATIO = 500; // encoder ticks per metre (0.00188496m/t)
+const float WHEELBASE = 0.37; // metres
 const float HALF_VEHICLE_WIDTH = WHEELBASE / 2; // metres
-const float MAX_SPEED = 1300 / WHEEL_RATIO;
 
 double leftDelta = 0;
 double rightDelta = 0;
@@ -89,21 +88,20 @@ const int MIN_SPEED = 4; // 8 mm/s
 // ===================================
 // ===================================
 // ========== PID constants ==========
-const double KpL = 0.9; 
-const double KiL = 0.8;
-const double KdL = 0;
+const double KpL = 0.9; // 0.9;
+const double KiL = 0.8;//0.8;
+const double KdL = 0;// D BAD DONT USE D JUST PI CONTROLLER OTHERWISE BAD STUFF WILL HAPPEN
 const double biasL = 0;
 
-const double KpR = 0.9;
-const double KiR = 0.8;
-const double KdR = 0;
+const double KpR = 0.9;//0.9;
+const double KiR = 0.8;//0.8;
+const double KdR = 0;//0.02; D BAD DONT USE D JUST PI CONTROLLER OTHERWISE BAD STUFF WILL HAPPEN
 const double biasR = 0;
-
 
 const long int TIME = 20000; // us/microseconds
 
 const float VELOCITY_ALPHA = 0.1;
-const float SETPOINT_ALPHA = 0.1; //0.4
+const float SETPOINT_ALPHA = 0.1;//0.1; //0.4
 
 const int RESET_THRESHOLD = 40;
 const float DEST_THRESHOLD = 0.15;
@@ -126,27 +124,18 @@ long long int prev_R = 0;
 
 // time variables
 unsigned long prevTimePID = 0;
-// unsigned long prevTimePIDL = 0;
-// unsigned long prevTimePIDR = 0;
+
 unsigned long currTimePID = 0;
 
 int driveData[3] = {0,0,0};
-
-
-/// CIRCLE TRACKING VARIABLES
 long int dt;
 long int dtCircle;
 long int prevCircleTime = 0;
-
-const float T = 1; // Time to get to target in seconds
-const long int CIRCLE_TIME = 500000;
-float AVERAGE_TARGET_VELOCITY = 0.5; //  m/s
-
+float dtL;
+float dtR;
 
 int des_L = 0;
 int des_R = 0;
-
-int prevResetEnc = 0;
 
 //====================================
 
@@ -158,6 +147,10 @@ int dataIndex = 0;
 const float KdpL = 0.32;
 const float KdpR = 0.29;
 const long int dumbTime = 500000;
+
+
+const float T = 3; //Time multiplier
+const long int CIRCLE_TIME = 500000;
 
 //const int ERROR_TOLERANCE = 2;
 
@@ -188,7 +181,7 @@ void setup() {
 }
 
 //====================================
-int loop_no = 0;
+
 void loop() {
   recvWithStartEndMarkers();
   if (newData == true) {
@@ -199,15 +192,15 @@ void loop() {
       integral_R = 0;
 
       //setpoint prefiltering
-      // des_L = lowPassFilter(dataRX[0], des_L, SETPOINT_ALPHA);
-      // des_R = lowPassFilter(dataRX[1], des_R, SETPOINT_ALPHA);
+      des_L = lowPassFilter(dataRX[0], des_L, SETPOINT_ALPHA);
+      des_R = lowPassFilter(dataRX[1], des_R, SETPOINT_ALPHA);
 
       //with circle tracking thingy
-      targPos.x = (double) dataRX[0] / 100;
-      targPos.y = (double) dataRX[1] / 100;
-      targVel = circle_track(currPos, targPos, headingVec, AVERAGE_TARGET_VELOCITY);
-      des_L = lowPassFilter(targVel.x * WHEEL_RATIO, des_L, SETPOINT_ALPHA);
-      des_R = lowPassFilter(targVel.y * WHEEL_RATIO, des_R, SETPOINT_ALPHA);
+      // targPos.x = (float) dataRX[0] / 100;
+      // targPos.y = (float) dataRX[1] / 100;
+      // targVel = circle_track(currPos, targPos, headingVec);
+      // des_L = lowPassFilter(targVel.x * WHEEL_RATIO, des_L, SETPOINT_ALPHA);
+      // des_R = lowPassFilter(targVel.y * WHEEL_RATIO, des_R, SETPOINT_ALPHA);
 
       //des_L = dataRX[0];
       //des_R = dataRX[1];
@@ -223,40 +216,23 @@ void loop() {
       newData = false;
   }
   currentTime = millis();
-  //sendEncoder();  
+  //sendEncoder();
+  //writeOdometry(); 
+  
   updateOdometry();
   //sendOdometry();
-  sendVecs(); 
+  // sendVecs(); 
 
   PID(des_L, des_R);
 
-  if (abs(targPos.x - currPos.x) < DEST_THRESHOLD && abs(targPos.y - currPos.y) < DEST_THRESHOLD) {
-    driveData[0] = 0;
-    driveData[1] = 0;
-    driveData[2] = 1;
-    integral_L = 0;
-    integral_R = 0;
-  }
-
-  dtCircle = (long)(micros() - prevCircleTime);
-  
-  // if (dtCircle > CIRCLE_TIME) {
-  //   targVel = circle_track(currPos, targPos, headingVec);
-  // }
   
   if(dt > TIME) {
     //printPID();
-    //printVel();
+    printVelFormat();
     
-    // des_L = lowPassFilter(dataRX[0], des_L, SETPOINT_ALPHA);
-    // des_R = lowPassFilter(dataRX[1], des_R, SETPOINT_ALPHA);
-    
-    loop_no += 1;
-    if(loop_no % 20 == 0){
-      targVel = circle_track(currPos, targPos, headingVec, AVERAGE_TARGET_VELOCITY);
-    }
-    des_L = lowPassFilter(targVel.x * WHEEL_RATIO, des_L, SETPOINT_ALPHA);
-    des_R = lowPassFilter(targVel.y * WHEEL_RATIO, des_R, SETPOINT_ALPHA);
+    des_L = lowPassFilter(dataRX[0], des_L, SETPOINT_ALPHA);
+    des_R = lowPassFilter(dataRX[1], des_R, SETPOINT_ALPHA);
+
 
     drive(driveData);
   }
@@ -314,14 +290,13 @@ void parseDataPID() {      // split the data into its parts
   strtokIndx = strtok(NULL, ","); // get the third part - int3
   dataRX[3] = atoi(strtokIndx);     // convert this part to an integer
 
-
   // Check if dataRX[2] is within 0 and 2
   if (dataRX[2] < 0 || dataRX[2] > 2) {
       dataRX[2] = 1;
   }
 
   // Reset distance if dataRX[3] is 1
-  if (dataRX[3] != prevResetEnc) {
+  if (dataRX[3] == 1) {
     // encoderPosition[0] = 0;
     // encoderPosition[1] = 0;
     dPos.x = 0;
@@ -330,11 +305,6 @@ void parseDataPID() {      // split the data into its parts
     currPos.y = 0;
     heading = 0;
     deltaHeading = 0;
-    targPos.x = 0;
-    targPos.y = 0;
-    des_L = 0;
-    des_R = 0;
-    prevResetEnc = dataRX[3];
   }
 }
 
@@ -388,7 +358,7 @@ float boundAngle(float angle) {
 
 //Low pass filter for velocity
 float lowPassFilter(float input, float prev, float alpha) {
-  return alpha * input + (1 - alpha) * prev;
+  return alpha * input + (1.0 - alpha) * prev;
 }
 
 
@@ -512,6 +482,7 @@ void PID(float desired_L, float desired_R) {
 // calculate pid, but with additional feedforward values from a lookup table
 
 
+
 void printVel() {
   Serial.print(current_L);
   Serial.print(" ");
@@ -524,6 +495,18 @@ void printVel() {
   Serial.print("0");
   Serial.print(" ");
   Serial.println("500");
+}
+
+void printVelFormat() {
+  Serial.print("<");
+  Serial.print(current_L);
+  Serial.print(",");
+  Serial.print(current_R);
+  Serial.print(",");
+  Serial.print(des_L);
+  Serial.print(",");
+  Serial.print(des_R);
+  Serial.println(">");
 }
 
 void printPID() {
@@ -680,9 +663,8 @@ vec circle_track1(vec s, vec t, vec h){
   return motorSpeeds;
 }
 
-vec circle_track(vec s, vec t, vec h, float vel){
+vec circle_track(vec s, vec t, vec h){
   prevCircleTime = micros();
-
 
   vec motorSpeeds; //the x is the "left side", the y is the "right side"
   vec d;
@@ -696,9 +678,8 @@ vec circle_track(vec s, vec t, vec h, float vel){
     motorSpeeds.y = 0;
     return motorSpeeds;
   }
-  float calcTime = sqrt(d_mag_sq) / vel; 
   //rough speed that we should be targeting, based on the heureustic that we want to arrive in ~1s. NOTE THAT THE ROUNDING IS _MANDATORY_. DO NOT! REMOVE!!
-  float speed = round(sqrt(d_mag_sq) * 5) / (5 * calcTime);
+  float speed = round(sqrt(d_mag_sq) * 5) / (5 * T);
   //cross product. if 0, straight line. if positive, turn left. if negative, turn right.
   double cp = (double) h.x * d.y - h.y * d.x;
   if(cp == 0){

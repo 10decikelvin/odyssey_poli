@@ -1,0 +1,42 @@
+\chapter{Autonomous Robot Navigation System}
+\hypertarget{md__r_e_a_d_m_e}{}\label{md__r_e_a_d_m_e}\index{Autonomous Robot Navigation System@{Autonomous Robot Navigation System}}
+\label{md__r_e_a_d_m_e_autotoc_md0}%
+\Hypertarget{md__r_e_a_d_m_e_autotoc_md0}%
+ This project is designed to control an autonomous robot, enabling it to navigate towards a target position while avoiding obstacles. It utilizes PID control for precise movement and implements various algorithms for path planning and obstacle avoidance.\hypertarget{md__r_e_a_d_m_e_autotoc_md1}{}\doxysection{\texorpdfstring{Features}{Features}}\label{md__r_e_a_d_m_e_autotoc_md1}
+
+\begin{DoxyItemize}
+\item {\bfseries{PID Control}}\+: Utilizes Proportional-\/\+Integral-\/\+Derivative (PID) control to manage the robot\textquotesingle{}s speed and direction accurately.
+\item {\bfseries{Serial Communication}}\+: Communicates with external devices or computers through serial communication, allowing for dynamic target position updates.
+\item {\bfseries{Encoder Feedback}}\+: Uses encoders for feedback on the robot\textquotesingle{}s movement, ensuring accurate positioning and speed control.
+\item {\bfseries{Low-\/\+Pass Filtering}}\+: Implements low-\/pass filtering to smooth out the control signals, reducing noise and fluctuations.
+\item {\bfseries{Circle Tracking}}\+: Includes an algorithm for circle tracking, enabling the robot to follow curved paths smoothly.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysection{\texorpdfstring{Components}{Components}}\label{md__r_e_a_d_m_e_autotoc_md2}
+
+\begin{DoxyItemize}
+\item {\bfseries{vec Struct}}\+: Represents a 2D vector with {\ttfamily x} and {\ttfamily y} components, used for positions and velocities.
+\item {\bfseries{Setup Function}}\+: Initializes serial communication, motor, and encoder pins, and attaches interrupt routines for encoders.
+\item {\bfseries{Main Loop}}\+: Continuously reads serial data for new target positions, calculates desired velocities using PID control, and sends commands to the motors.
+\item {\bfseries{Interrupt Service Routines (ISRs)}}\+: Reads encoder positions to provide feedback for the control system.
+\item {\bfseries{Utility Functions}}\+:
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{sketch__with__pid__copy_8cpp_ac3b63746dc4a3ba4fb04e5845dae3de7}{recv\+With\+Start\+End\+Markers()}}\+: Reads incoming serial data with start and end markers.
+\item {\ttfamily \doxylink{sketch__with__pid__copy_8cpp_ac31776b24afc4b0083dfbea60b98d158}{parse\+Data\+PID()}}\+: Parses the received data into target positions, modes, and reset commands.
+\item {\ttfamily \doxylink{group___p_i_d_ga62c70c5a6cf15cba086967b591aa24a5}{low\+Pass\+Filter()}}\+: Applies a low-\/pass filter to smooth out the control signals.
+\item {\ttfamily \doxylink{group__odo_ga615eedf2626f65913a3597402a57747a}{bound\+Angle()}}\+: Normalizes angles to the range \mbox{[}0, 2π) for consistent calculations.
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysection{\texorpdfstring{Setup}{Setup}}\label{md__r_e_a_d_m_e_autotoc_md3}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Hardware Setup}}\+: Connect motors, encoders, and any other necessary hardware to the microcontroller according to the defined pin assignments in the code.
+\item {\bfseries{Software Setup}}\+: Upload the provided code to the microcontroller. Ensure any external device intended to communicate with the robot is set up to send data in the correct format.
+\end{DoxyEnumerate}\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysection{\texorpdfstring{Usage}{Usage}}\label{md__r_e_a_d_m_e_autotoc_md4}
+
+\begin{DoxyItemize}
+\item To command the robot, send data in the format {\ttfamily \texorpdfstring{$<$}{<}target\+\_\+x, target\+\_\+y, mode, reset\+Enc\texorpdfstring{$>$}{>}} through serial communication.
+\begin{DoxyItemize}
+\item {\ttfamily target\+\_\+x} and {\ttfamily target\+\_\+y} are the coordinates of the target position in centimeters.
+\item {\ttfamily mode} can be {\ttfamily 0} for normal operation, {\ttfamily 1} for off, or {\ttfamily 2} for brake.
+\item {\ttfamily reset\+Enc} resets the encoder positions when changed from {\ttfamily 0} to {\ttfamily 1}.
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysection{\texorpdfstring{Note}{Note}}\label{md__r_e_a_d_m_e_autotoc_md5}
+This project is designed for the 2024 QUT DRC. It provides a basic framework for autonomous robot navigation but may require adjustments and improvements for specific applications or more complex environments. 

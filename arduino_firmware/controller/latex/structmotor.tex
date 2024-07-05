@@ -1,0 +1,64 @@
+\doxysection{motor Struct Reference}
+\hypertarget{structmotor}{}\label{structmotor}\index{motor@{motor}}
+
+
+Structure to represent motor parameters for PID feedforward.
+
+This structure is used within the lookup table to map specific motor speed (in ticks per second) to a corresponding PWM signal value and operational mode. It is a key component in implementing feedforward control in PID controllers for motors.  
+
+
+
+
+{\ttfamily \#include $<$lut.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{structmotor_a845edc207899960c8ae0e16b6dc25004}{speed}}
+\item 
+int \mbox{\hyperlink{structmotor_ae20965b818aabaa47512437ca22bceee}{pwm}}
+\item 
+int \mbox{\hyperlink{structmotor_a4026fd64d8ac10ea73aff67447377872}{mode}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Structure to represent motor parameters for PID feedforward.
+
+This structure is used within the lookup table to map specific motor speed (in ticks per second) to a corresponding PWM signal value and operational mode. It is a key component in implementing feedforward control in PID controllers for motors. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em speed} & Motor speed in ticks per second. \\
+\hline
+{\em pwm} & PWM signal value (0-\/255) for speed control. \\
+\hline
+{\em mode} & Operational mode of the motor (0 = normal, 1 = coast). \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structmotor_a4026fd64d8ac10ea73aff67447377872}\index{motor@{motor}!mode@{mode}}
+\index{mode@{mode}!motor@{motor}}
+\doxysubsubsection{\texorpdfstring{mode}{mode}}
+{\footnotesize\ttfamily \label{structmotor_a4026fd64d8ac10ea73aff67447377872} 
+int motor\+::mode}
+
+\Hypertarget{structmotor_ae20965b818aabaa47512437ca22bceee}\index{motor@{motor}!pwm@{pwm}}
+\index{pwm@{pwm}!motor@{motor}}
+\doxysubsubsection{\texorpdfstring{pwm}{pwm}}
+{\footnotesize\ttfamily \label{structmotor_ae20965b818aabaa47512437ca22bceee} 
+int motor\+::pwm}
+
+\Hypertarget{structmotor_a845edc207899960c8ae0e16b6dc25004}\index{motor@{motor}!speed@{speed}}
+\index{speed@{speed}!motor@{motor}}
+\doxysubsubsection{\texorpdfstring{speed}{speed}}
+{\footnotesize\ttfamily \label{structmotor_a845edc207899960c8ae0e16b6dc25004} 
+int motor\+::speed}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{lut_8h}{lut.\+h}}\end{DoxyCompactItemize}

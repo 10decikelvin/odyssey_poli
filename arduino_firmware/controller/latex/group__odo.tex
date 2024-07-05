@@ -1,0 +1,444 @@
+\doxysection{Odometry Calculations}
+\hypertarget{group__odo}{}\label{group__odo}\index{Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structvec}{vec}}
+\begin{DoxyCompactList}\small\item\em The struct {\ttfamily vec} represents a 2D vector with {\ttfamily x} and {\ttfamily y} components. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__odo_ga1b396d9fdb93e679f3c7360999f939f9}{read\+EncoderR}} ()
+\begin{DoxyCompactList}\small\item\em Interrupt service routine for reading the right encoder. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__odo_ga63ff61071cabb899703d29661460829f}{read\+EncoderL}} ()
+\begin{DoxyCompactList}\small\item\em Interrupt service routine for reading the left encoder. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{group__odo_ga615eedf2626f65913a3597402a57747a}{bound\+Angle}} (float angle)
+\begin{DoxyCompactList}\small\item\em Normalizes an angle to the range \mbox{[}0, 2π).
+
+This function ensures that any given angle in radians is converted to an equivalent angle within the range \mbox{[}0, 2π). It is useful for angle comparisons or operations where the angle needs to be within a single, continuous 360-\/degree cycle. The normalization is done by adding or subtracting 2π from the angle until it falls within the desired range. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__odo_ga509065d6cb087a29f10a8ac06315e8d6}{update\+Odometry}} ()
+\begin{DoxyCompactList}\small\item\em Updates the odometry information of the robot.
+
+This function calculates the new position and heading of the robot based on the encoder readings. It updates the robot\textquotesingle{}s current position (curr\+Pos), heading, and the change in position (d\+Pos) and heading (delta\+Heading) since the last update. The calculations differentiate between straight movement and turning by checking the difference in encoder values for the left and right wheels. For straight movement, the position update is straightforward. For turning, it calculates the turning radius and adjusts the position and heading accordingly. The function ensures that the heading is always normalized to the range \mbox{[}0, 2π) using the bound\+Angle function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__odo_ga7e1b24c7363a2a31d08f3a790e6ac5da}{send\+Odometry}} ()
+\begin{DoxyCompactList}\small\item\em sends the odometry information to the serial monitor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+long int \mbox{\hyperlink{group__odo_gaa582693b3ffa977ffc655ff8910361d6}{encoder\+Position}} \mbox{[}2\mbox{]} = \{0, 0\}
+\begin{DoxyCompactList}\small\item\em Stores last encoder positions L and R. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group__odo_ga54a84e6d5f3f89312965614e2b1c1c7e}{left\+Delta}} = 0
+\begin{DoxyCompactList}\small\item\em change in left encoder ticks \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group__odo_gaa406852379a82896987d6d4f42a8a4af}{right\+Delta}} = 0
+\begin{DoxyCompactList}\small\item\em change in right encoder ticks \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group__odo_gaa93eea860f24fdae86e8046f91e0abee}{newX}} = 0
+\begin{DoxyCompactList}\small\item\em new x position \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group__odo_ga93f5ed905091e9d0c3ed9c326cea9af5}{newY}} = 0
+\begin{DoxyCompactList}\small\item\em new y position \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group__odo_gaf88b946fb90d5f08b5fb740c70e98c10}{x}} = 0
+\begin{DoxyCompactList}\small\item\em current x position \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group__odo_gab927965981178aa1fba979a37168db2a}{y}} = 0
+\begin{DoxyCompactList}\small\item\em current y position \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group__odo_ga229d11aff11a7482259d1296b9b70b8a}{dx}} = 0
+\begin{DoxyCompactList}\small\item\em change in x position \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group__odo_ga9deb6f886b19d50e714d890c3c268efc}{dy}} = 0
+\begin{DoxyCompactList}\small\item\em change in y position \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{group__odo_ga2578b368dad74bcd4a88bbeeb319a833}{dist}} = 0
+\begin{DoxyCompactList}\small\item\em average distance travelled \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{group__odo_gabe6ce48459268ff1d20bf479ec67ca80}{prev\+Left}} = 0
+\begin{DoxyCompactList}\small\item\em previous left encoder position \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{group__odo_ga102239f725c3b7d708c5991cad1a6557}{prev\+Right}} = 0
+\begin{DoxyCompactList}\small\item\em previous right encoder position \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{group__odo_ga628c85623f767d1052f5bee5ad05b87f}{prev\+Time}} = 0
+\begin{DoxyCompactList}\small\item\em previous time since last odometry update \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{group__odo_gaf205655c0c86fc6aaf4c8450d8243938}{current\+Time}} = 0
+\begin{DoxyCompactList}\small\item\em current time \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{group__odo_gac5682e48513a771560df50e3b213e61a}{heading}} = 0
+\begin{DoxyCompactList}\small\item\em current heading in radians \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{group__odo_gadee96d9141f7268226c12fcaa6faab3c}{new\+Heading}} = 0
+\begin{DoxyCompactList}\small\item\em new heading in radians \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{group__odo_ga3675925d36f25c9b5d58f386447c738a}{delta\+Heading}} = 0
+\begin{DoxyCompactList}\small\item\em change in heading \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structvec}{vec}} \mbox{\hyperlink{group__odo_ga6a6e187d35ac4a573dd4e1600e78b8df}{curr\+Pos}} = \{0,0\}
+\begin{DoxyCompactList}\small\item\em current position of the robot \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structvec}{vec}} \mbox{\hyperlink{group__odo_ga6261384a46520efa0c6a0297deaf12f7}{new\+Pos}} = \{0,0\}
+\begin{DoxyCompactList}\small\item\em new position of the robot \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structvec}{vec}} \mbox{\hyperlink{group__odo_gafbf098f632b8f9671a88b62e6fcbe242}{d\+Pos}} = \{0,0\}
+\begin{DoxyCompactList}\small\item\em change in position of the robot \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structvec}{vec}} \mbox{\hyperlink{group__odo_ga7f6791b7b38d8cbd2178461c5bd3218e}{targ\+Pos}} = \{0,0\}
+\begin{DoxyCompactList}\small\item\em target position of the robot \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structvec}{vec}} \mbox{\hyperlink{group__odo_ga7115ac3f543322ed5f9571ce25c1853f}{targ\+Vel}} = \{0,0\}
+\begin{DoxyCompactList}\small\item\em target velocity of the robot, where the x component is the left wheel and the y component is the right wheel \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structvec}{vec}} \mbox{\hyperlink{group__odo_ga66b9e49a65c2ba85ca14a7db7ab0ed40}{heading\+Vec}} = \{1,0\}
+\begin{DoxyCompactList}\small\item\em heading vector of the robot \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group__odo_gae971c211bbe3c1cb99ffbceec8093cad}{current\+\_\+L}} = 0
+\begin{DoxyCompactList}\small\item\em current left side velocity IN TICKS PER SECOND =\texorpdfstring{$>$}{>} 1m/s = 531 ticks/s \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group__odo_ga600f14e6cd5c78535777d6c06854285d}{current\+\_\+R}} = 0
+\begin{DoxyCompactList}\small\item\em current right side velocity IN TICKS PER SECOND =\texorpdfstring{$>$}{>} 1m/s = 531 ticks/s \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group__odo_gad22e26cee2c68e9e7afb2197bb5f51fd}{prev\+\_\+\+Vel\+\_\+L}} = 0
+\begin{DoxyCompactList}\small\item\em previous left side velocity \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group__odo_gaf3655ccc855e1fda95246013f8a06a30}{prev\+\_\+\+Vel\+\_\+R}} = 0
+\begin{DoxyCompactList}\small\item\em previous right side velocity \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group__odo_ga16a7eee63e3b1d82978695a7064a7fc6}{vec\+::x}}
+\item 
+double \mbox{\hyperlink{group__odo_gad7effb515272b2f1010b88a97c90a8c2}{vec\+::y}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{group__odo_ga615eedf2626f65913a3597402a57747a}\index{Odometry Calculations@{Odometry Calculations}!boundAngle@{boundAngle}}
+\index{boundAngle@{boundAngle}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{boundAngle()}{boundAngle()}}
+{\footnotesize\ttfamily \label{group__odo_ga615eedf2626f65913a3597402a57747a} 
+float bound\+Angle (\begin{DoxyParamCaption}\item[{float}]{angle}{}\end{DoxyParamCaption})}
+
+
+
+Normalizes an angle to the range \mbox{[}0, 2π).
+
+This function ensures that any given angle in radians is converted to an equivalent angle within the range \mbox{[}0, 2π). It is useful for angle comparisons or operations where the angle needs to be within a single, continuous 360-\/degree cycle. The normalization is done by adding or subtracting 2π from the angle until it falls within the desired range. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em angle} & The input angle in radians to be normalized. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The normalized angle in radians, guaranteed to be between 0 (inclusive) and 2π (exclusive). 
+\end{DoxyReturn}
+\Hypertarget{group__odo_ga63ff61071cabb899703d29661460829f}\index{Odometry Calculations@{Odometry Calculations}!readEncoderL@{readEncoderL}}
+\index{readEncoderL@{readEncoderL}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{readEncoderL()}{readEncoderL()}}
+{\footnotesize\ttfamily \label{group__odo_ga63ff61071cabb899703d29661460829f} 
+void read\+EncoderL (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Interrupt service routine for reading the left encoder. 
+
+\Hypertarget{group__odo_ga1b396d9fdb93e679f3c7360999f939f9}\index{Odometry Calculations@{Odometry Calculations}!readEncoderR@{readEncoderR}}
+\index{readEncoderR@{readEncoderR}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{readEncoderR()}{readEncoderR()}}
+{\footnotesize\ttfamily \label{group__odo_ga1b396d9fdb93e679f3c7360999f939f9} 
+void read\+EncoderR (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Interrupt service routine for reading the right encoder. 
+
+\Hypertarget{group__odo_ga7e1b24c7363a2a31d08f3a790e6ac5da}\index{Odometry Calculations@{Odometry Calculations}!sendOdometry@{sendOdometry}}
+\index{sendOdometry@{sendOdometry}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{sendOdometry()}{sendOdometry()}}
+{\footnotesize\ttfamily \label{group__odo_ga7e1b24c7363a2a31d08f3a790e6ac5da} 
+void send\+Odometry (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+sends the odometry information to the serial monitor. 
+
+\Hypertarget{group__odo_ga509065d6cb087a29f10a8ac06315e8d6}\index{Odometry Calculations@{Odometry Calculations}!updateOdometry@{updateOdometry}}
+\index{updateOdometry@{updateOdometry}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{updateOdometry()}{updateOdometry()}}
+{\footnotesize\ttfamily \label{group__odo_ga509065d6cb087a29f10a8ac06315e8d6} 
+void update\+Odometry (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Updates the odometry information of the robot.
+
+This function calculates the new position and heading of the robot based on the encoder readings. It updates the robot\textquotesingle{}s current position (curr\+Pos), heading, and the change in position (d\+Pos) and heading (delta\+Heading) since the last update. The calculations differentiate between straight movement and turning by checking the difference in encoder values for the left and right wheels. For straight movement, the position update is straightforward. For turning, it calculates the turning radius and adjusts the position and heading accordingly. The function ensures that the heading is always normalized to the range \mbox{[}0, 2π) using the bound\+Angle function. 
+
+\begin{DoxyNote}{Note}
+This function uses the {\ttfamily WHEEL\+\_\+\+RATIO} constant to convert encoder ticks to metres and the {\ttfamily WHEELBASE} constant to determine the distance between the two wheels. It also uses the {\ttfamily heading\+Vec} vector to represent the heading
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+\doxylink{group__odo_ga615eedf2626f65913a3597402a57747a}{bound\+Angle()} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{group__odo_gae971c211bbe3c1cb99ffbceec8093cad}\index{Odometry Calculations@{Odometry Calculations}!current\_L@{current\_L}}
+\index{current\_L@{current\_L}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{current\_L}{current\_L}}
+{\footnotesize\ttfamily \label{group__odo_gae971c211bbe3c1cb99ffbceec8093cad} 
+double current\+\_\+L = 0}
+
+
+
+current left side velocity IN TICKS PER SECOND =\texorpdfstring{$>$}{>} 1m/s = 531 ticks/s 
+
+\Hypertarget{group__odo_ga600f14e6cd5c78535777d6c06854285d}\index{Odometry Calculations@{Odometry Calculations}!current\_R@{current\_R}}
+\index{current\_R@{current\_R}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{current\_R}{current\_R}}
+{\footnotesize\ttfamily \label{group__odo_ga600f14e6cd5c78535777d6c06854285d} 
+double current\+\_\+R = 0}
+
+
+
+current right side velocity IN TICKS PER SECOND =\texorpdfstring{$>$}{>} 1m/s = 531 ticks/s 
+
+\Hypertarget{group__odo_gaf205655c0c86fc6aaf4c8450d8243938}\index{Odometry Calculations@{Odometry Calculations}!currentTime@{currentTime}}
+\index{currentTime@{currentTime}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{currentTime}{currentTime}}
+{\footnotesize\ttfamily \label{group__odo_gaf205655c0c86fc6aaf4c8450d8243938} 
+unsigned long current\+Time = 0}
+
+
+
+current time 
+
+\Hypertarget{group__odo_ga6a6e187d35ac4a573dd4e1600e78b8df}\index{Odometry Calculations@{Odometry Calculations}!currPos@{currPos}}
+\index{currPos@{currPos}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{currPos}{currPos}}
+{\footnotesize\ttfamily \label{group__odo_ga6a6e187d35ac4a573dd4e1600e78b8df} 
+\mbox{\hyperlink{structvec}{vec}} curr\+Pos = \{0,0\}}
+
+
+
+current position of the robot 
+
+\Hypertarget{group__odo_ga3675925d36f25c9b5d58f386447c738a}\index{Odometry Calculations@{Odometry Calculations}!deltaHeading@{deltaHeading}}
+\index{deltaHeading@{deltaHeading}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{deltaHeading}{deltaHeading}}
+{\footnotesize\ttfamily \label{group__odo_ga3675925d36f25c9b5d58f386447c738a} 
+float delta\+Heading = 0}
+
+
+
+change in heading 
+
+\Hypertarget{group__odo_ga2578b368dad74bcd4a88bbeeb319a833}\index{Odometry Calculations@{Odometry Calculations}!dist@{dist}}
+\index{dist@{dist}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{dist}{dist}}
+{\footnotesize\ttfamily \label{group__odo_ga2578b368dad74bcd4a88bbeeb319a833} 
+float dist = 0}
+
+
+
+average distance travelled 
+
+\Hypertarget{group__odo_gafbf098f632b8f9671a88b62e6fcbe242}\index{Odometry Calculations@{Odometry Calculations}!dPos@{dPos}}
+\index{dPos@{dPos}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{dPos}{dPos}}
+{\footnotesize\ttfamily \label{group__odo_gafbf098f632b8f9671a88b62e6fcbe242} 
+\mbox{\hyperlink{structvec}{vec}} d\+Pos = \{0,0\}}
+
+
+
+change in position of the robot 
+
+\Hypertarget{group__odo_ga229d11aff11a7482259d1296b9b70b8a}\index{Odometry Calculations@{Odometry Calculations}!dx@{dx}}
+\index{dx@{dx}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{dx}{dx}}
+{\footnotesize\ttfamily \label{group__odo_ga229d11aff11a7482259d1296b9b70b8a} 
+double dx = 0}
+
+
+
+change in x position 
+
+\Hypertarget{group__odo_ga9deb6f886b19d50e714d890c3c268efc}\index{Odometry Calculations@{Odometry Calculations}!dy@{dy}}
+\index{dy@{dy}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{dy}{dy}}
+{\footnotesize\ttfamily \label{group__odo_ga9deb6f886b19d50e714d890c3c268efc} 
+double dy = 0}
+
+
+
+change in y position 
+
+\Hypertarget{group__odo_gaa582693b3ffa977ffc655ff8910361d6}\index{Odometry Calculations@{Odometry Calculations}!encoderPosition@{encoderPosition}}
+\index{encoderPosition@{encoderPosition}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{encoderPosition}{encoderPosition}}
+{\footnotesize\ttfamily \label{group__odo_gaa582693b3ffa977ffc655ff8910361d6} 
+long int encoder\+Position\mbox{[}2\mbox{]} = \{0, 0\}}
+
+
+
+Stores last encoder positions L and R. 
+
+\Hypertarget{group__odo_gac5682e48513a771560df50e3b213e61a}\index{Odometry Calculations@{Odometry Calculations}!heading@{heading}}
+\index{heading@{heading}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{heading}{heading}}
+{\footnotesize\ttfamily \label{group__odo_gac5682e48513a771560df50e3b213e61a} 
+float heading = 0}
+
+
+
+current heading in radians 
+
+\Hypertarget{group__odo_ga66b9e49a65c2ba85ca14a7db7ab0ed40}\index{Odometry Calculations@{Odometry Calculations}!headingVec@{headingVec}}
+\index{headingVec@{headingVec}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{headingVec}{headingVec}}
+{\footnotesize\ttfamily \label{group__odo_ga66b9e49a65c2ba85ca14a7db7ab0ed40} 
+\mbox{\hyperlink{structvec}{vec}} heading\+Vec = \{1,0\}}
+
+
+
+heading vector of the robot 
+
+\Hypertarget{group__odo_ga54a84e6d5f3f89312965614e2b1c1c7e}\index{Odometry Calculations@{Odometry Calculations}!leftDelta@{leftDelta}}
+\index{leftDelta@{leftDelta}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{leftDelta}{leftDelta}}
+{\footnotesize\ttfamily \label{group__odo_ga54a84e6d5f3f89312965614e2b1c1c7e} 
+double left\+Delta = 0}
+
+
+
+change in left encoder ticks 
+
+\Hypertarget{group__odo_gadee96d9141f7268226c12fcaa6faab3c}\index{Odometry Calculations@{Odometry Calculations}!newHeading@{newHeading}}
+\index{newHeading@{newHeading}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{newHeading}{newHeading}}
+{\footnotesize\ttfamily \label{group__odo_gadee96d9141f7268226c12fcaa6faab3c} 
+float new\+Heading = 0}
+
+
+
+new heading in radians 
+
+\Hypertarget{group__odo_ga6261384a46520efa0c6a0297deaf12f7}\index{Odometry Calculations@{Odometry Calculations}!newPos@{newPos}}
+\index{newPos@{newPos}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{newPos}{newPos}}
+{\footnotesize\ttfamily \label{group__odo_ga6261384a46520efa0c6a0297deaf12f7} 
+\mbox{\hyperlink{structvec}{vec}} new\+Pos = \{0,0\}}
+
+
+
+new position of the robot 
+
+\Hypertarget{group__odo_gaa93eea860f24fdae86e8046f91e0abee}\index{Odometry Calculations@{Odometry Calculations}!newX@{newX}}
+\index{newX@{newX}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{newX}{newX}}
+{\footnotesize\ttfamily \label{group__odo_gaa93eea860f24fdae86e8046f91e0abee} 
+double newX = 0}
+
+
+
+new x position 
+
+\Hypertarget{group__odo_ga93f5ed905091e9d0c3ed9c326cea9af5}\index{Odometry Calculations@{Odometry Calculations}!newY@{newY}}
+\index{newY@{newY}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{newY}{newY}}
+{\footnotesize\ttfamily \label{group__odo_ga93f5ed905091e9d0c3ed9c326cea9af5} 
+double newY = 0}
+
+
+
+new y position 
+
+\Hypertarget{group__odo_gad22e26cee2c68e9e7afb2197bb5f51fd}\index{Odometry Calculations@{Odometry Calculations}!prev\_Vel\_L@{prev\_Vel\_L}}
+\index{prev\_Vel\_L@{prev\_Vel\_L}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{prev\_Vel\_L}{prev\_Vel\_L}}
+{\footnotesize\ttfamily \label{group__odo_gad22e26cee2c68e9e7afb2197bb5f51fd} 
+double prev\+\_\+\+Vel\+\_\+L = 0}
+
+
+
+previous left side velocity 
+
+\Hypertarget{group__odo_gaf3655ccc855e1fda95246013f8a06a30}\index{Odometry Calculations@{Odometry Calculations}!prev\_Vel\_R@{prev\_Vel\_R}}
+\index{prev\_Vel\_R@{prev\_Vel\_R}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{prev\_Vel\_R}{prev\_Vel\_R}}
+{\footnotesize\ttfamily \label{group__odo_gaf3655ccc855e1fda95246013f8a06a30} 
+double prev\+\_\+\+Vel\+\_\+R = 0}
+
+
+
+previous right side velocity 
+
+\Hypertarget{group__odo_gabe6ce48459268ff1d20bf479ec67ca80}\index{Odometry Calculations@{Odometry Calculations}!prevLeft@{prevLeft}}
+\index{prevLeft@{prevLeft}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{prevLeft}{prevLeft}}
+{\footnotesize\ttfamily \label{group__odo_gabe6ce48459268ff1d20bf479ec67ca80} 
+long prev\+Left = 0}
+
+
+
+previous left encoder position 
+
+\Hypertarget{group__odo_ga102239f725c3b7d708c5991cad1a6557}\index{Odometry Calculations@{Odometry Calculations}!prevRight@{prevRight}}
+\index{prevRight@{prevRight}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{prevRight}{prevRight}}
+{\footnotesize\ttfamily \label{group__odo_ga102239f725c3b7d708c5991cad1a6557} 
+long prev\+Right = 0}
+
+
+
+previous right encoder position 
+
+\Hypertarget{group__odo_ga628c85623f767d1052f5bee5ad05b87f}\index{Odometry Calculations@{Odometry Calculations}!prevTime@{prevTime}}
+\index{prevTime@{prevTime}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{prevTime}{prevTime}}
+{\footnotesize\ttfamily \label{group__odo_ga628c85623f767d1052f5bee5ad05b87f} 
+unsigned long prev\+Time = 0}
+
+
+
+previous time since last odometry update 
+
+\Hypertarget{group__odo_gaa406852379a82896987d6d4f42a8a4af}\index{Odometry Calculations@{Odometry Calculations}!rightDelta@{rightDelta}}
+\index{rightDelta@{rightDelta}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{rightDelta}{rightDelta}}
+{\footnotesize\ttfamily \label{group__odo_gaa406852379a82896987d6d4f42a8a4af} 
+double right\+Delta = 0}
+
+
+
+change in right encoder ticks 
+
+\Hypertarget{group__odo_ga7f6791b7b38d8cbd2178461c5bd3218e}\index{Odometry Calculations@{Odometry Calculations}!targPos@{targPos}}
+\index{targPos@{targPos}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{targPos}{targPos}}
+{\footnotesize\ttfamily \label{group__odo_ga7f6791b7b38d8cbd2178461c5bd3218e} 
+\mbox{\hyperlink{structvec}{vec}} targ\+Pos = \{0,0\}}
+
+
+
+target position of the robot 
+
+\Hypertarget{group__odo_ga7115ac3f543322ed5f9571ce25c1853f}\index{Odometry Calculations@{Odometry Calculations}!targVel@{targVel}}
+\index{targVel@{targVel}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{targVel}{targVel}}
+{\footnotesize\ttfamily \label{group__odo_ga7115ac3f543322ed5f9571ce25c1853f} 
+\mbox{\hyperlink{structvec}{vec}} targ\+Vel = \{0,0\}}
+
+
+
+target velocity of the robot, where the x component is the left wheel and the y component is the right wheel 
+
+\Hypertarget{group__odo_ga16a7eee63e3b1d82978695a7064a7fc6}\index{Odometry Calculations@{Odometry Calculations}!x@{x}}
+\index{x@{x}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{x}{x}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{group__odo_ga16a7eee63e3b1d82978695a7064a7fc6} 
+double vec\+::x}
+
+The property {\ttfamily x} in the {\ttfamily vec} struct represents the x-\/coordinate of a 2D vector. \Hypertarget{group__odo_gaf88b946fb90d5f08b5fb740c70e98c10}\index{Odometry Calculations@{Odometry Calculations}!x@{x}}
+\index{x@{x}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{x}{x}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{group__odo_gaf88b946fb90d5f08b5fb740c70e98c10} 
+double x = 0}
+
+
+
+current x position 
+
+\Hypertarget{group__odo_gad7effb515272b2f1010b88a97c90a8c2}\index{Odometry Calculations@{Odometry Calculations}!y@{y}}
+\index{y@{y}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{y}{y}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{group__odo_gad7effb515272b2f1010b88a97c90a8c2} 
+double vec\+::y}
+
+The {\ttfamily y} property in the {\ttfamily vec} struct represents the y-\/coordinate of a 2D vector. \Hypertarget{group__odo_gab927965981178aa1fba979a37168db2a}\index{Odometry Calculations@{Odometry Calculations}!y@{y}}
+\index{y@{y}!Odometry Calculations@{Odometry Calculations}}
+\doxysubsubsection{\texorpdfstring{y}{y}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{group__odo_gab927965981178aa1fba979a37168db2a} 
+double y = 0}
+
+
+
+current y position 
+

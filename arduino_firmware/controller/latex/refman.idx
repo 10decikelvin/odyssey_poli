@@ -1,0 +1,219 @@
+\indexentry{Autonomous Robot Navigation Firmware@{Autonomous Robot Navigation Firmware}|hyperpage}{1}
+\indexentry{Serial Communication@{Serial Communication}|hyperpage}{9}
+\indexentry{Serial Communication@{Serial Communication}!parseDataPID@{parseDataPID}|hyperpage}{10}
+\indexentry{parseDataPID@{parseDataPID}!Serial Communication@{Serial Communication}|hyperpage}{10}
+\indexentry{Serial Communication@{Serial Communication}!recvWithStartEndMarkers@{recvWithStartEndMarkers}|hyperpage}{10}
+\indexentry{recvWithStartEndMarkers@{recvWithStartEndMarkers}!Serial Communication@{Serial Communication}|hyperpage}{10}
+\indexentry{Serial Communication@{Serial Communication}!dataRX@{dataRX}|hyperpage}{11}
+\indexentry{dataRX@{dataRX}!Serial Communication@{Serial Communication}|hyperpage}{11}
+\indexentry{Serial Communication@{Serial Communication}!newData@{newData}|hyperpage}{11}
+\indexentry{newData@{newData}!Serial Communication@{Serial Communication}|hyperpage}{11}
+\indexentry{Serial Communication@{Serial Communication}!numChars@{numChars}|hyperpage}{11}
+\indexentry{numChars@{numChars}!Serial Communication@{Serial Communication}|hyperpage}{11}
+\indexentry{Serial Communication@{Serial Communication}!prevResetEnc@{prevResetEnc}|hyperpage}{11}
+\indexentry{prevResetEnc@{prevResetEnc}!Serial Communication@{Serial Communication}|hyperpage}{11}
+\indexentry{Serial Communication@{Serial Communication}!receivedChars@{receivedChars}|hyperpage}{11}
+\indexentry{receivedChars@{receivedChars}!Serial Communication@{Serial Communication}|hyperpage}{11}
+\indexentry{Serial Communication@{Serial Communication}!tempChars@{tempChars}|hyperpage}{12}
+\indexentry{tempChars@{tempChars}!Serial Communication@{Serial Communication}|hyperpage}{12}
+\indexentry{Vehicle@{Vehicle}|hyperpage}{12}
+\indexentry{Vehicle@{Vehicle}!drive@{drive}|hyperpage}{13}
+\indexentry{drive@{drive}!Vehicle@{Vehicle}|hyperpage}{13}
+\indexentry{Vehicle@{Vehicle}!HALF\_VEHICLE\_WIDTH@{HALF\_VEHICLE\_WIDTH}|hyperpage}{13}
+\indexentry{HALF\_VEHICLE\_WIDTH@{HALF\_VEHICLE\_WIDTH}!Vehicle@{Vehicle}|hyperpage}{13}
+\indexentry{Vehicle@{Vehicle}!MAX\_PWM@{MAX\_PWM}|hyperpage}{13}
+\indexentry{MAX\_PWM@{MAX\_PWM}!Vehicle@{Vehicle}|hyperpage}{13}
+\indexentry{Vehicle@{Vehicle}!MAX\_SPEED@{MAX\_SPEED}|hyperpage}{13}
+\indexentry{MAX\_SPEED@{MAX\_SPEED}!Vehicle@{Vehicle}|hyperpage}{13}
+\indexentry{Vehicle@{Vehicle}!MIN\_SPEED@{MIN\_SPEED}|hyperpage}{14}
+\indexentry{MIN\_SPEED@{MIN\_SPEED}!Vehicle@{Vehicle}|hyperpage}{14}
+\indexentry{Vehicle@{Vehicle}!WHEEL\_RATIO@{WHEEL\_RATIO}|hyperpage}{14}
+\indexentry{WHEEL\_RATIO@{WHEEL\_RATIO}!Vehicle@{Vehicle}|hyperpage}{14}
+\indexentry{Vehicle@{Vehicle}!WHEELBASE@{WHEELBASE}|hyperpage}{14}
+\indexentry{WHEELBASE@{WHEELBASE}!Vehicle@{Vehicle}|hyperpage}{14}
+\indexentry{Odometry Calculations@{Odometry Calculations}|hyperpage}{14}
+\indexentry{Odometry Calculations@{Odometry Calculations}!boundAngle@{boundAngle}|hyperpage}{16}
+\indexentry{boundAngle@{boundAngle}!Odometry Calculations@{Odometry Calculations}|hyperpage}{16}
+\indexentry{Odometry Calculations@{Odometry Calculations}!readEncoderL@{readEncoderL}|hyperpage}{16}
+\indexentry{readEncoderL@{readEncoderL}!Odometry Calculations@{Odometry Calculations}|hyperpage}{16}
+\indexentry{Odometry Calculations@{Odometry Calculations}!readEncoderR@{readEncoderR}|hyperpage}{16}
+\indexentry{readEncoderR@{readEncoderR}!Odometry Calculations@{Odometry Calculations}|hyperpage}{16}
+\indexentry{Odometry Calculations@{Odometry Calculations}!sendOdometry@{sendOdometry}|hyperpage}{16}
+\indexentry{sendOdometry@{sendOdometry}!Odometry Calculations@{Odometry Calculations}|hyperpage}{16}
+\indexentry{Odometry Calculations@{Odometry Calculations}!updateOdometry@{updateOdometry}|hyperpage}{16}
+\indexentry{updateOdometry@{updateOdometry}!Odometry Calculations@{Odometry Calculations}|hyperpage}{16}
+\indexentry{Odometry Calculations@{Odometry Calculations}!current\_L@{current\_L}|hyperpage}{17}
+\indexentry{current\_L@{current\_L}!Odometry Calculations@{Odometry Calculations}|hyperpage}{17}
+\indexentry{Odometry Calculations@{Odometry Calculations}!current\_R@{current\_R}|hyperpage}{17}
+\indexentry{current\_R@{current\_R}!Odometry Calculations@{Odometry Calculations}|hyperpage}{17}
+\indexentry{Odometry Calculations@{Odometry Calculations}!currentTime@{currentTime}|hyperpage}{17}
+\indexentry{currentTime@{currentTime}!Odometry Calculations@{Odometry Calculations}|hyperpage}{17}
+\indexentry{Odometry Calculations@{Odometry Calculations}!currPos@{currPos}|hyperpage}{17}
+\indexentry{currPos@{currPos}!Odometry Calculations@{Odometry Calculations}|hyperpage}{17}
+\indexentry{Odometry Calculations@{Odometry Calculations}!deltaHeading@{deltaHeading}|hyperpage}{17}
+\indexentry{deltaHeading@{deltaHeading}!Odometry Calculations@{Odometry Calculations}|hyperpage}{17}
+\indexentry{Odometry Calculations@{Odometry Calculations}!dist@{dist}|hyperpage}{18}
+\indexentry{dist@{dist}!Odometry Calculations@{Odometry Calculations}|hyperpage}{18}
+\indexentry{Odometry Calculations@{Odometry Calculations}!dPos@{dPos}|hyperpage}{18}
+\indexentry{dPos@{dPos}!Odometry Calculations@{Odometry Calculations}|hyperpage}{18}
+\indexentry{Odometry Calculations@{Odometry Calculations}!dx@{dx}|hyperpage}{18}
+\indexentry{dx@{dx}!Odometry Calculations@{Odometry Calculations}|hyperpage}{18}
+\indexentry{Odometry Calculations@{Odometry Calculations}!dy@{dy}|hyperpage}{18}
+\indexentry{dy@{dy}!Odometry Calculations@{Odometry Calculations}|hyperpage}{18}
+\indexentry{Odometry Calculations@{Odometry Calculations}!encoderPosition@{encoderPosition}|hyperpage}{18}
+\indexentry{encoderPosition@{encoderPosition}!Odometry Calculations@{Odometry Calculations}|hyperpage}{18}
+\indexentry{Odometry Calculations@{Odometry Calculations}!heading@{heading}|hyperpage}{18}
+\indexentry{heading@{heading}!Odometry Calculations@{Odometry Calculations}|hyperpage}{18}
+\indexentry{Odometry Calculations@{Odometry Calculations}!headingVec@{headingVec}|hyperpage}{18}
+\indexentry{headingVec@{headingVec}!Odometry Calculations@{Odometry Calculations}|hyperpage}{18}
+\indexentry{Odometry Calculations@{Odometry Calculations}!leftDelta@{leftDelta}|hyperpage}{18}
+\indexentry{leftDelta@{leftDelta}!Odometry Calculations@{Odometry Calculations}|hyperpage}{18}
+\indexentry{Odometry Calculations@{Odometry Calculations}!newHeading@{newHeading}|hyperpage}{19}
+\indexentry{newHeading@{newHeading}!Odometry Calculations@{Odometry Calculations}|hyperpage}{19}
+\indexentry{Odometry Calculations@{Odometry Calculations}!newPos@{newPos}|hyperpage}{19}
+\indexentry{newPos@{newPos}!Odometry Calculations@{Odometry Calculations}|hyperpage}{19}
+\indexentry{Odometry Calculations@{Odometry Calculations}!newX@{newX}|hyperpage}{19}
+\indexentry{newX@{newX}!Odometry Calculations@{Odometry Calculations}|hyperpage}{19}
+\indexentry{Odometry Calculations@{Odometry Calculations}!newY@{newY}|hyperpage}{19}
+\indexentry{newY@{newY}!Odometry Calculations@{Odometry Calculations}|hyperpage}{19}
+\indexentry{Odometry Calculations@{Odometry Calculations}!prev\_Vel\_L@{prev\_Vel\_L}|hyperpage}{19}
+\indexentry{prev\_Vel\_L@{prev\_Vel\_L}!Odometry Calculations@{Odometry Calculations}|hyperpage}{19}
+\indexentry{Odometry Calculations@{Odometry Calculations}!prev\_Vel\_R@{prev\_Vel\_R}|hyperpage}{19}
+\indexentry{prev\_Vel\_R@{prev\_Vel\_R}!Odometry Calculations@{Odometry Calculations}|hyperpage}{19}
+\indexentry{Odometry Calculations@{Odometry Calculations}!prevLeft@{prevLeft}|hyperpage}{19}
+\indexentry{prevLeft@{prevLeft}!Odometry Calculations@{Odometry Calculations}|hyperpage}{19}
+\indexentry{Odometry Calculations@{Odometry Calculations}!prevRight@{prevRight}|hyperpage}{19}
+\indexentry{prevRight@{prevRight}!Odometry Calculations@{Odometry Calculations}|hyperpage}{19}
+\indexentry{Odometry Calculations@{Odometry Calculations}!prevTime@{prevTime}|hyperpage}{20}
+\indexentry{prevTime@{prevTime}!Odometry Calculations@{Odometry Calculations}|hyperpage}{20}
+\indexentry{Odometry Calculations@{Odometry Calculations}!rightDelta@{rightDelta}|hyperpage}{20}
+\indexentry{rightDelta@{rightDelta}!Odometry Calculations@{Odometry Calculations}|hyperpage}{20}
+\indexentry{Odometry Calculations@{Odometry Calculations}!targPos@{targPos}|hyperpage}{20}
+\indexentry{targPos@{targPos}!Odometry Calculations@{Odometry Calculations}|hyperpage}{20}
+\indexentry{Odometry Calculations@{Odometry Calculations}!targVel@{targVel}|hyperpage}{20}
+\indexentry{targVel@{targVel}!Odometry Calculations@{Odometry Calculations}|hyperpage}{20}
+\indexentry{Odometry Calculations@{Odometry Calculations}!x@{x}|hyperpage}{20}
+\indexentry{x@{x}!Odometry Calculations@{Odometry Calculations}|hyperpage}{20}
+\indexentry{Odometry Calculations@{Odometry Calculations}!x@{x}|hyperpage}{20}
+\indexentry{x@{x}!Odometry Calculations@{Odometry Calculations}|hyperpage}{20}
+\indexentry{Odometry Calculations@{Odometry Calculations}!y@{y}|hyperpage}{20}
+\indexentry{y@{y}!Odometry Calculations@{Odometry Calculations}|hyperpage}{20}
+\indexentry{Odometry Calculations@{Odometry Calculations}!y@{y}|hyperpage}{20}
+\indexentry{y@{y}!Odometry Calculations@{Odometry Calculations}|hyperpage}{20}
+\indexentry{PID Controller@{PID Controller}|hyperpage}{21}
+\indexentry{PID Controller@{PID Controller}!clampSpeed@{clampSpeed}|hyperpage}{23}
+\indexentry{clampSpeed@{clampSpeed}!PID Controller@{PID Controller}|hyperpage}{23}
+\indexentry{PID Controller@{PID Controller}!lookupFF@{lookupFF}|hyperpage}{23}
+\indexentry{lookupFF@{lookupFF}!PID Controller@{PID Controller}|hyperpage}{23}
+\indexentry{PID Controller@{PID Controller}!lowPassFilter@{lowPassFilter}|hyperpage}{23}
+\indexentry{lowPassFilter@{lowPassFilter}!PID Controller@{PID Controller}|hyperpage}{23}
+\indexentry{PID Controller@{PID Controller}!PID@{PID}|hyperpage}{24}
+\indexentry{PID@{PID}!PID Controller@{PID Controller}|hyperpage}{24}
+\indexentry{PID Controller@{PID Controller}!printPID@{printPID}|hyperpage}{24}
+\indexentry{printPID@{printPID}!PID Controller@{PID Controller}|hyperpage}{24}
+\indexentry{PID Controller@{PID Controller}!printVel@{printVel}|hyperpage}{25}
+\indexentry{printVel@{printVel}!PID Controller@{PID Controller}|hyperpage}{25}
+\indexentry{PID Controller@{PID Controller}!bias@{bias}|hyperpage}{25}
+\indexentry{bias@{bias}!PID Controller@{PID Controller}|hyperpage}{25}
+\indexentry{PID Controller@{PID Controller}!currTimePID@{currTimePID}|hyperpage}{25}
+\indexentry{currTimePID@{currTimePID}!PID Controller@{PID Controller}|hyperpage}{25}
+\indexentry{PID Controller@{PID Controller}!DEST\_THRESHOLD@{DEST\_THRESHOLD}|hyperpage}{25}
+\indexentry{DEST\_THRESHOLD@{DEST\_THRESHOLD}!PID Controller@{PID Controller}|hyperpage}{25}
+\indexentry{PID Controller@{PID Controller}!driveData@{driveData}|hyperpage}{25}
+\indexentry{driveData@{driveData}!PID Controller@{PID Controller}|hyperpage}{25}
+\indexentry{PID Controller@{PID Controller}!dt@{dt}|hyperpage}{25}
+\indexentry{dt@{dt}!PID Controller@{PID Controller}|hyperpage}{25}
+\indexentry{PID Controller@{PID Controller}!e\_prev\_L@{e\_prev\_L}|hyperpage}{25}
+\indexentry{e\_prev\_L@{e\_prev\_L}!PID Controller@{PID Controller}|hyperpage}{25}
+\indexentry{PID Controller@{PID Controller}!e\_prev\_R@{e\_prev\_R}|hyperpage}{26}
+\indexentry{e\_prev\_R@{e\_prev\_R}!PID Controller@{PID Controller}|hyperpage}{26}
+\indexentry{PID Controller@{PID Controller}!integral\_L@{integral\_L}|hyperpage}{26}
+\indexentry{integral\_L@{integral\_L}!PID Controller@{PID Controller}|hyperpage}{26}
+\indexentry{PID Controller@{PID Controller}!integral\_R@{integral\_R}|hyperpage}{26}
+\indexentry{integral\_R@{integral\_R}!PID Controller@{PID Controller}|hyperpage}{26}
+\indexentry{PID Controller@{PID Controller}!Kd@{Kd}|hyperpage}{26}
+\indexentry{Kd@{Kd}!PID Controller@{PID Controller}|hyperpage}{26}
+\indexentry{PID Controller@{PID Controller}!Ki@{Ki}|hyperpage}{26}
+\indexentry{Ki@{Ki}!PID Controller@{PID Controller}|hyperpage}{26}
+\indexentry{PID Controller@{PID Controller}!Kp@{Kp}|hyperpage}{26}
+\indexentry{Kp@{Kp}!PID Controller@{PID Controller}|hyperpage}{26}
+\indexentry{PID Controller@{PID Controller}!lut@{lut}|hyperpage}{26}
+\indexentry{lut@{lut}!PID Controller@{PID Controller}|hyperpage}{26}
+\indexentry{PID Controller@{PID Controller}!output\_L@{output\_L}|hyperpage}{27}
+\indexentry{output\_L@{output\_L}!PID Controller@{PID Controller}|hyperpage}{27}
+\indexentry{PID Controller@{PID Controller}!output\_R@{output\_R}|hyperpage}{27}
+\indexentry{output\_R@{output\_R}!PID Controller@{PID Controller}|hyperpage}{27}
+\indexentry{PID Controller@{PID Controller}!PID\_TIME@{PID\_TIME}|hyperpage}{27}
+\indexentry{PID\_TIME@{PID\_TIME}!PID Controller@{PID Controller}|hyperpage}{27}
+\indexentry{PID Controller@{PID Controller}!prev\_L@{prev\_L}|hyperpage}{27}
+\indexentry{prev\_L@{prev\_L}!PID Controller@{PID Controller}|hyperpage}{27}
+\indexentry{PID Controller@{PID Controller}!prev\_R@{prev\_R}|hyperpage}{27}
+\indexentry{prev\_R@{prev\_R}!PID Controller@{PID Controller}|hyperpage}{27}
+\indexentry{PID Controller@{PID Controller}!prevTimePID@{prevTimePID}|hyperpage}{27}
+\indexentry{prevTimePID@{prevTimePID}!PID Controller@{PID Controller}|hyperpage}{27}
+\indexentry{PID Controller@{PID Controller}!SETPOINT\_ALPHA@{SETPOINT\_ALPHA}|hyperpage}{27}
+\indexentry{SETPOINT\_ALPHA@{SETPOINT\_ALPHA}!PID Controller@{PID Controller}|hyperpage}{27}
+\indexentry{PID Controller@{PID Controller}!VELOCITY\_ALPHA@{VELOCITY\_ALPHA}|hyperpage}{28}
+\indexentry{VELOCITY\_ALPHA@{VELOCITY\_ALPHA}!PID Controller@{PID Controller}|hyperpage}{28}
+\indexentry{Circle Tracking@{Circle Tracking}|hyperpage}{28}
+\indexentry{Circle Tracking@{Circle Tracking}!circle\_track@{circle\_track}|hyperpage}{29}
+\indexentry{circle\_track@{circle\_track}!Circle Tracking@{Circle Tracking}|hyperpage}{29}
+\indexentry{Circle Tracking@{Circle Tracking}!sendVecs@{sendVecs}|hyperpage}{29}
+\indexentry{sendVecs@{sendVecs}!Circle Tracking@{Circle Tracking}|hyperpage}{29}
+\indexentry{Circle Tracking@{Circle Tracking}!AVERAGE\_TARGET\_VELOCITY@{AVERAGE\_TARGET\_VELOCITY}|hyperpage}{29}
+\indexentry{AVERAGE\_TARGET\_VELOCITY@{AVERAGE\_TARGET\_VELOCITY}!Circle Tracking@{Circle Tracking}|hyperpage}{29}
+\indexentry{Circle Tracking@{Circle Tracking}!CIRCLE\_LOOPS@{CIRCLE\_LOOPS}|hyperpage}{29}
+\indexentry{CIRCLE\_LOOPS@{CIRCLE\_LOOPS}!Circle Tracking@{Circle Tracking}|hyperpage}{29}
+\indexentry{Circle Tracking@{Circle Tracking}!CIRCLE\_TIME@{CIRCLE\_TIME}|hyperpage}{30}
+\indexentry{CIRCLE\_TIME@{CIRCLE\_TIME}!Circle Tracking@{Circle Tracking}|hyperpage}{30}
+\indexentry{Circle Tracking@{Circle Tracking}!des\_L@{des\_L}|hyperpage}{30}
+\indexentry{des\_L@{des\_L}!Circle Tracking@{Circle Tracking}|hyperpage}{30}
+\indexentry{Circle Tracking@{Circle Tracking}!des\_R@{des\_R}|hyperpage}{30}
+\indexentry{des\_R@{des\_R}!Circle Tracking@{Circle Tracking}|hyperpage}{30}
+\indexentry{Circle Tracking@{Circle Tracking}!dtCircle@{dtCircle}|hyperpage}{30}
+\indexentry{dtCircle@{dtCircle}!Circle Tracking@{Circle Tracking}|hyperpage}{30}
+\indexentry{Circle Tracking@{Circle Tracking}!loop\_no@{loop\_no}|hyperpage}{30}
+\indexentry{loop\_no@{loop\_no}!Circle Tracking@{Circle Tracking}|hyperpage}{30}
+\indexentry{Circle Tracking@{Circle Tracking}!prevCircleTime@{prevCircleTime}|hyperpage}{30}
+\indexentry{prevCircleTime@{prevCircleTime}!Circle Tracking@{Circle Tracking}|hyperpage}{30}
+\indexentry{motor@{motor}|hyperpage}{31}
+\indexentry{motor@{motor}!mode@{mode}|hyperpage}{31}
+\indexentry{mode@{mode}!motor@{motor}|hyperpage}{31}
+\indexentry{motor@{motor}!pwm@{pwm}|hyperpage}{31}
+\indexentry{pwm@{pwm}!motor@{motor}|hyperpage}{31}
+\indexentry{motor@{motor}!speed@{speed}|hyperpage}{32}
+\indexentry{speed@{speed}!motor@{motor}|hyperpage}{32}
+\indexentry{vec@{vec}|hyperpage}{32}
+\indexentry{controller.cpp@{controller.cpp}|hyperpage}{33}
+\indexentry{controller.cpp@{controller.cpp}!loop@{loop}|hyperpage}{38}
+\indexentry{loop@{loop}!controller.cpp@{controller.cpp}|hyperpage}{38}
+\indexentry{controller.cpp@{controller.cpp}!sendEncoder@{sendEncoder}|hyperpage}{38}
+\indexentry{sendEncoder@{sendEncoder}!controller.cpp@{controller.cpp}|hyperpage}{38}
+\indexentry{controller.cpp@{controller.cpp}!setup@{setup}|hyperpage}{38}
+\indexentry{setup@{setup}!controller.cpp@{controller.cpp}|hyperpage}{38}
+\indexentry{controller.cpp@{controller.cpp}!encoderLPinA@{encoderLPinA}|hyperpage}{38}
+\indexentry{encoderLPinA@{encoderLPinA}!controller.cpp@{controller.cpp}|hyperpage}{38}
+\indexentry{controller.cpp@{controller.cpp}!encoderLPinB@{encoderLPinB}|hyperpage}{38}
+\indexentry{encoderLPinB@{encoderLPinB}!controller.cpp@{controller.cpp}|hyperpage}{38}
+\indexentry{controller.cpp@{controller.cpp}!encoderRPinA@{encoderRPinA}|hyperpage}{38}
+\indexentry{encoderRPinA@{encoderRPinA}!controller.cpp@{controller.cpp}|hyperpage}{38}
+\indexentry{controller.cpp@{controller.cpp}!encoderRPinB@{encoderRPinB}|hyperpage}{38}
+\indexentry{encoderRPinB@{encoderRPinB}!controller.cpp@{controller.cpp}|hyperpage}{38}
+\indexentry{controller.cpp@{controller.cpp}!MotorLLEN@{MotorLLEN}|hyperpage}{38}
+\indexentry{MotorLLEN@{MotorLLEN}!controller.cpp@{controller.cpp}|hyperpage}{38}
+\indexentry{controller.cpp@{controller.cpp}!MotorLLPWM@{MotorLLPWM}|hyperpage}{38}
+\indexentry{MotorLLPWM@{MotorLLPWM}!controller.cpp@{controller.cpp}|hyperpage}{38}
+\indexentry{controller.cpp@{controller.cpp}!MotorLREN@{MotorLREN}|hyperpage}{39}
+\indexentry{MotorLREN@{MotorLREN}!controller.cpp@{controller.cpp}|hyperpage}{39}
+\indexentry{controller.cpp@{controller.cpp}!MotorLRPWM@{MotorLRPWM}|hyperpage}{39}
+\indexentry{MotorLRPWM@{MotorLRPWM}!controller.cpp@{controller.cpp}|hyperpage}{39}
+\indexentry{controller.cpp@{controller.cpp}!MotorRLEN@{MotorRLEN}|hyperpage}{39}
+\indexentry{MotorRLEN@{MotorRLEN}!controller.cpp@{controller.cpp}|hyperpage}{39}
+\indexentry{controller.cpp@{controller.cpp}!MotorRLPWM@{MotorRLPWM}|hyperpage}{39}
+\indexentry{MotorRLPWM@{MotorRLPWM}!controller.cpp@{controller.cpp}|hyperpage}{39}
+\indexentry{controller.cpp@{controller.cpp}!MotorRREN@{MotorRREN}|hyperpage}{39}
+\indexentry{MotorRREN@{MotorRREN}!controller.cpp@{controller.cpp}|hyperpage}{39}
+\indexentry{controller.cpp@{controller.cpp}!MotorRRPWM@{MotorRRPWM}|hyperpage}{39}
+\indexentry{MotorRRPWM@{MotorRRPWM}!controller.cpp@{controller.cpp}|hyperpage}{39}
+\indexentry{lut.h@{lut.h}|hyperpage}{39}
+\indexentry{README.md@{README.md}|hyperpage}{41}

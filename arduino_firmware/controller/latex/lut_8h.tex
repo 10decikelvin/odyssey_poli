@@ -1,0 +1,30 @@
+\doxysection{lut.\+h File Reference}
+\hypertarget{lut_8h}{}\label{lut_8h}\index{lut.h@{lut.h}}
+
+
+Defines the lookup table for feedforward of PID.
+
+This header file contains the definition of a lookup table (LUT) used for the feedforward component of a PID controller. The LUT provides predefined output values for given input conditions, enhancing the PID controller\textquotesingle{}s response by compensating for known system behaviors in advance.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmotor}{motor}}
+\begin{DoxyCompactList}\small\item\em Structure to represent motor parameters for PID feedforward.
+
+This structure is used within the lookup table to map specific motor speed (in ticks per second) to a corresponding PWM signal value and operational mode. It is a key component in implementing feedforward control in PID controllers for motors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structmotor}{motor}} \mbox{\hyperlink{group___p_i_d_gaf50181bc3f9d26013b19b987fa0d28a3}{lut}} \mbox{[}$\,$\mbox{]}
+\begin{DoxyCompactList}\small\item\em Lookup table array for PID feedforward control.
+
+This array of {\ttfamily motor} structures defines the lookup table for the feedforward component of the PID controller. Each entry maps a specific motor speed to a PWM value and operational mode, allowing for immediate adjustment based on the current speed requirement. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines the lookup table for feedforward of PID.
+
+This header file contains the definition of a lookup table (LUT) used for the feedforward component of a PID controller. The LUT provides predefined output values for given input conditions, enhancing the PID controller\textquotesingle{}s response by compensating for known system behaviors in advance. 
+

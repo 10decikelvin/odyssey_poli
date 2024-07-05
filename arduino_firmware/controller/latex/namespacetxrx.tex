@@ -1,0 +1,62 @@
+\doxysection{txrx Namespace Reference}
+\hypertarget{namespacetxrx}{}\label{namespacetxrx}\index{txrx@{txrx}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacetxrx_a05c18d5f8edccc4bc2d8ebc685be2df9}{send}} (x, y, drive\+\_\+state, enc\+\_\+state)
+\item 
+\mbox{\hyperlink{namespacetxrx_a36fa2eafa1266c20342a77b58f85b561}{read}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacetxrx_a98c2dcbe7838def7c25ec5be941fad20}{port}} = "{}COM12"{}
+\item 
+int \mbox{\hyperlink{namespacetxrx_a850fe6818eb3eda201021b27d75f73cb}{baudrate}} = 500000
+\item 
+\mbox{\hyperlink{namespacetxrx_a6a3969d1cd246d80cc96113f77c253b7}{ser}} = serial.\+Serial(\mbox{\hyperlink{namespacetxrx_a98c2dcbe7838def7c25ec5be941fad20}{port}}, \mbox{\hyperlink{namespacetxrx_a850fe6818eb3eda201021b27d75f73cb}{baudrate}}, timeout=0.\+1, write\+\_\+timeout=0.\+5)
+\item 
+str \mbox{\hyperlink{namespacetxrx_a67b63f6d10163cfeb8ed7a41473058c0}{RXPattern}} = "{}\texorpdfstring{$^\wedge$}{\string^}\mbox{[}\textbackslash{}s\textbackslash{}S\mbox{]}\texorpdfstring{$\ast$}{*}$<$(-\/?\textbackslash{}d+(?\+:\textbackslash{}.\textbackslash{}d+)?),(-\/?\textbackslash{}d+(?\+:\textbackslash{}.\textbackslash{}d+)?),(-\/?\textbackslash{}d+(?\+:\textbackslash{}.\textbackslash{}d+)?),(-\/?\textbackslash{}d+(?\+:\textbackslash{}.\textbackslash{}d+)?),(-\/?\textbackslash{}d+(?\+:\textbackslash{}.\textbackslash{}d+)?),(-\/?\textbackslash{}d+(?\+:\textbackslash{}.\textbackslash{}d+)?),(-\/?\textbackslash{}d+(?\+:\textbackslash{}.\textbackslash{}d+)?)$>$\mbox{[}\textbackslash{}s\textbackslash{}S\mbox{]}\texorpdfstring{$\ast$}{*}\$"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacetxrx_a36fa2eafa1266c20342a77b58f85b561}\index{txrx@{txrx}!read@{read}}
+\index{read@{read}!txrx@{txrx}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily \label{namespacetxrx_a36fa2eafa1266c20342a77b58f85b561} 
+txrx.\+read (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespacetxrx_a05c18d5f8edccc4bc2d8ebc685be2df9}\index{txrx@{txrx}!send@{send}}
+\index{send@{send}!txrx@{txrx}}
+\doxysubsubsection{\texorpdfstring{send()}{send()}}
+{\footnotesize\ttfamily \label{namespacetxrx_a05c18d5f8edccc4bc2d8ebc685be2df9} 
+txrx.\+send (\begin{DoxyParamCaption}\item[{}]{x}{, }\item[{}]{y}{, }\item[{}]{drive\+\_\+state}{, }\item[{}]{enc\+\_\+state}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacetxrx_a850fe6818eb3eda201021b27d75f73cb}\index{txrx@{txrx}!baudrate@{baudrate}}
+\index{baudrate@{baudrate}!txrx@{txrx}}
+\doxysubsubsection{\texorpdfstring{baudrate}{baudrate}}
+{\footnotesize\ttfamily \label{namespacetxrx_a850fe6818eb3eda201021b27d75f73cb} 
+int txrx.\+baudrate = 500000}
+
+\Hypertarget{namespacetxrx_a98c2dcbe7838def7c25ec5be941fad20}\index{txrx@{txrx}!port@{port}}
+\index{port@{port}!txrx@{txrx}}
+\doxysubsubsection{\texorpdfstring{port}{port}}
+{\footnotesize\ttfamily \label{namespacetxrx_a98c2dcbe7838def7c25ec5be941fad20} 
+str txrx.\+port = "{}COM12"{}}
+
+\Hypertarget{namespacetxrx_a67b63f6d10163cfeb8ed7a41473058c0}\index{txrx@{txrx}!RXPattern@{RXPattern}}
+\index{RXPattern@{RXPattern}!txrx@{txrx}}
+\doxysubsubsection{\texorpdfstring{RXPattern}{RXPattern}}
+{\footnotesize\ttfamily \label{namespacetxrx_a67b63f6d10163cfeb8ed7a41473058c0} 
+str txrx.\+RXPattern = "{}\texorpdfstring{$^\wedge$}{\string^}\mbox{[}\textbackslash{}s\textbackslash{}S\mbox{]}\texorpdfstring{$\ast$}{*}$<$(-\/?\textbackslash{}d+(?\+:\textbackslash{}.\textbackslash{}d+)?),(-\/?\textbackslash{}d+(?\+:\textbackslash{}.\textbackslash{}d+)?),(-\/?\textbackslash{}d+(?\+:\textbackslash{}.\textbackslash{}d+)?),(-\/?\textbackslash{}d+(?\+:\textbackslash{}.\textbackslash{}d+)?),(-\/?\textbackslash{}d+(?\+:\textbackslash{}.\textbackslash{}d+)?),(-\/?\textbackslash{}d+(?\+:\textbackslash{}.\textbackslash{}d+)?),(-\/?\textbackslash{}d+(?\+:\textbackslash{}.\textbackslash{}d+)?)$>$\mbox{[}\textbackslash{}s\textbackslash{}S\mbox{]}\texorpdfstring{$\ast$}{*}\$"{}}
+
+\Hypertarget{namespacetxrx_a6a3969d1cd246d80cc96113f77c253b7}\index{txrx@{txrx}!ser@{ser}}
+\index{ser@{ser}!txrx@{txrx}}
+\doxysubsubsection{\texorpdfstring{ser}{ser}}
+{\footnotesize\ttfamily \label{namespacetxrx_a6a3969d1cd246d80cc96113f77c253b7} 
+txrx.\+ser = serial.\+Serial(\mbox{\hyperlink{namespacetxrx_a98c2dcbe7838def7c25ec5be941fad20}{port}}, \mbox{\hyperlink{namespacetxrx_a850fe6818eb3eda201021b27d75f73cb}{baudrate}}, timeout=0.\+1, write\+\_\+timeout=0.\+5)}
+

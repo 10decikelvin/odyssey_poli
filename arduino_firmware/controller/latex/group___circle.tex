@@ -1,0 +1,107 @@
+\doxysection{Circle Tracking}
+\hypertarget{group___circle}{}\label{group___circle}\index{Circle Tracking@{Circle Tracking}}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+long int \mbox{\hyperlink{group___circle_ga711de31e5f23c9bce1a990ecb3b87ece}{dt\+Circle}}
+\begin{DoxyCompactList}\small\item\em time difference for circle tracking \end{DoxyCompactList}\item 
+long int \mbox{\hyperlink{group___circle_ga528e2b4ef79df24e1dd08edef61b9287}{prev\+Circle\+Time}} = 0
+\begin{DoxyCompactList}\small\item\em previous time for circle tracking \end{DoxyCompactList}\item 
+const long int \mbox{\hyperlink{group___circle_ga7f06888a20c73a79e7aaa81363378845}{CIRCLE\+\_\+\+TIME}} = 500000
+\begin{DoxyCompactList}\small\item\em μs \texorpdfstring{$\vert$}{|} Circle tracking update time \end{DoxyCompactList}\item 
+const int \mbox{\hyperlink{group___circle_ga5318d915170220fe788572be250a5dd8}{CIRCLE\+\_\+\+LOOPS}} = \mbox{\hyperlink{group___circle_ga7f06888a20c73a79e7aaa81363378845}{CIRCLE\+\_\+\+TIME}}/\mbox{\hyperlink{group___p_i_d_gaeb53e5d7ad15d22a3219183cfd59fdf1}{PID\+\_\+\+TIME}}
+\begin{DoxyCompactList}\small\item\em number of loops for circle tracking \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{group___circle_gaeee616ef0b97f334f47ae26c2bde5c4d}{AVERAGE\+\_\+\+TARGET\+\_\+\+VELOCITY}} = 0.\+5
+\begin{DoxyCompactList}\small\item\em m/s \texorpdfstring{$\vert$}{|} average target velocity for circle tracking \end{DoxyCompactList}\item 
+long int \mbox{\hyperlink{group___circle_gae28621c15a1e8e4d814cfd499ea3b12b}{loop\+\_\+no}} = 0
+\begin{DoxyCompactList}\small\item\em loop number for circle tracking \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group___circle_gad7827216a39d669d61224bc94d771478}{des\+\_\+L}} = 0
+\begin{DoxyCompactList}\small\item\em calculated desired left speed \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group___circle_ga8aef7eca2f3ef952b93eea3cc4b75e91}{des\+\_\+R}} = 0
+\begin{DoxyCompactList}\small\item\em calculated desired right speed \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{group___circle_gaeee616ef0b97f334f47ae26c2bde5c4d}\index{Circle Tracking@{Circle Tracking}!AVERAGE\_TARGET\_VELOCITY@{AVERAGE\_TARGET\_VELOCITY}}
+\index{AVERAGE\_TARGET\_VELOCITY@{AVERAGE\_TARGET\_VELOCITY}!Circle Tracking@{Circle Tracking}}
+\doxysubsubsection{\texorpdfstring{AVERAGE\_TARGET\_VELOCITY}{AVERAGE\_TARGET\_VELOCITY}}
+{\footnotesize\ttfamily \label{group___circle_gaeee616ef0b97f334f47ae26c2bde5c4d} 
+float AVERAGE\+\_\+\+TARGET\+\_\+\+VELOCITY = 0.\+5}
+
+
+
+m/s \texorpdfstring{$\vert$}{|} average target velocity for circle tracking 
+
+\Hypertarget{group___circle_ga5318d915170220fe788572be250a5dd8}\index{Circle Tracking@{Circle Tracking}!CIRCLE\_LOOPS@{CIRCLE\_LOOPS}}
+\index{CIRCLE\_LOOPS@{CIRCLE\_LOOPS}!Circle Tracking@{Circle Tracking}}
+\doxysubsubsection{\texorpdfstring{CIRCLE\_LOOPS}{CIRCLE\_LOOPS}}
+{\footnotesize\ttfamily \label{group___circle_ga5318d915170220fe788572be250a5dd8} 
+const int CIRCLE\+\_\+\+LOOPS = \mbox{\hyperlink{group___circle_ga7f06888a20c73a79e7aaa81363378845}{CIRCLE\+\_\+\+TIME}}/\mbox{\hyperlink{group___p_i_d_gaeb53e5d7ad15d22a3219183cfd59fdf1}{PID\+\_\+\+TIME}}}
+
+
+
+number of loops for circle tracking 
+
+\Hypertarget{group___circle_ga7f06888a20c73a79e7aaa81363378845}\index{Circle Tracking@{Circle Tracking}!CIRCLE\_TIME@{CIRCLE\_TIME}}
+\index{CIRCLE\_TIME@{CIRCLE\_TIME}!Circle Tracking@{Circle Tracking}}
+\doxysubsubsection{\texorpdfstring{CIRCLE\_TIME}{CIRCLE\_TIME}}
+{\footnotesize\ttfamily \label{group___circle_ga7f06888a20c73a79e7aaa81363378845} 
+const long int CIRCLE\+\_\+\+TIME = 500000}
+
+
+
+μs \texorpdfstring{$\vert$}{|} Circle tracking update time 
+
+\Hypertarget{group___circle_gad7827216a39d669d61224bc94d771478}\index{Circle Tracking@{Circle Tracking}!des\_L@{des\_L}}
+\index{des\_L@{des\_L}!Circle Tracking@{Circle Tracking}}
+\doxysubsubsection{\texorpdfstring{des\_L}{des\_L}}
+{\footnotesize\ttfamily \label{group___circle_gad7827216a39d669d61224bc94d771478} 
+int des\+\_\+L = 0}
+
+
+
+calculated desired left speed 
+
+\Hypertarget{group___circle_ga8aef7eca2f3ef952b93eea3cc4b75e91}\index{Circle Tracking@{Circle Tracking}!des\_R@{des\_R}}
+\index{des\_R@{des\_R}!Circle Tracking@{Circle Tracking}}
+\doxysubsubsection{\texorpdfstring{des\_R}{des\_R}}
+{\footnotesize\ttfamily \label{group___circle_ga8aef7eca2f3ef952b93eea3cc4b75e91} 
+int des\+\_\+R = 0}
+
+
+
+calculated desired right speed 
+
+\Hypertarget{group___circle_ga711de31e5f23c9bce1a990ecb3b87ece}\index{Circle Tracking@{Circle Tracking}!dtCircle@{dtCircle}}
+\index{dtCircle@{dtCircle}!Circle Tracking@{Circle Tracking}}
+\doxysubsubsection{\texorpdfstring{dtCircle}{dtCircle}}
+{\footnotesize\ttfamily \label{group___circle_ga711de31e5f23c9bce1a990ecb3b87ece} 
+long int dt\+Circle}
+
+
+
+time difference for circle tracking 
+
+\Hypertarget{group___circle_gae28621c15a1e8e4d814cfd499ea3b12b}\index{Circle Tracking@{Circle Tracking}!loop\_no@{loop\_no}}
+\index{loop\_no@{loop\_no}!Circle Tracking@{Circle Tracking}}
+\doxysubsubsection{\texorpdfstring{loop\_no}{loop\_no}}
+{\footnotesize\ttfamily \label{group___circle_gae28621c15a1e8e4d814cfd499ea3b12b} 
+long int loop\+\_\+no = 0}
+
+
+
+loop number for circle tracking 
+
+\Hypertarget{group___circle_ga528e2b4ef79df24e1dd08edef61b9287}\index{Circle Tracking@{Circle Tracking}!prevCircleTime@{prevCircleTime}}
+\index{prevCircleTime@{prevCircleTime}!Circle Tracking@{Circle Tracking}}
+\doxysubsubsection{\texorpdfstring{prevCircleTime}{prevCircleTime}}
+{\footnotesize\ttfamily \label{group___circle_ga528e2b4ef79df24e1dd08edef61b9287} 
+long int prev\+Circle\+Time = 0}
+
+
+
+previous time for circle tracking 
+

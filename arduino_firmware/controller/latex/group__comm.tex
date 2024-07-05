@@ -1,0 +1,166 @@
+\doxysection{Serial Communication}
+\hypertarget{group__comm}{}\label{group__comm}\index{Serial Communication@{Serial Communication}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__comm_gac3b63746dc4a3ba4fb04e5845dae3de7}{recv\+With\+Start\+End\+Markers}} ()
+\begin{DoxyCompactList}\small\item\em Receives a string of characters via Serial until a specific end marker is found.
+
+This function listens for characters coming in via Serial communication, assembling them into a string. The string assembly starts when a predefined start marker character is detected and ends when an end marker character is received. The assembled string is stored in {\ttfamily received\+Chars} and is made available once the end marker is detected. This function uses static variables to maintain state between calls. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__comm_gac31776b24afc4b0083dfbea60b98d158}{parse\+Data\+PID}} ()
+\begin{DoxyCompactList}\small\item\em Parses the received data into its individual parts.
+
+This function uses the {\ttfamily strtok()} function to split the received string into its individual parts. The parts are then converted to integers and stored in the {\ttfamily data\+RX\mbox{[}\mbox{]}} array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const byte \mbox{\hyperlink{group__comm_gafe4adf197fc6ec15c9341446d8f4c466}{num\+Chars}} = 32
+\begin{DoxyCompactList}\small\item\em number of characters in the array \end{DoxyCompactList}\item 
+char \mbox{\hyperlink{group__comm_ga8972b9a588f5736ca4e5d8b6f08bb08b}{received\+Chars}} \mbox{[}\mbox{\hyperlink{group__comm_gafe4adf197fc6ec15c9341446d8f4c466}{num\+Chars}}\mbox{]}
+\begin{DoxyCompactList}\small\item\em array to store received data ~\newline
+ \end{DoxyCompactList}\item 
+char \mbox{\hyperlink{group__comm_ga4d4e1ff6898c6a376081efc7fb39317e}{temp\+Chars}} \mbox{[}\mbox{\hyperlink{group__comm_gafe4adf197fc6ec15c9341446d8f4c466}{num\+Chars}}\mbox{]}
+\begin{DoxyCompactList}\small\item\em temporary array for use when parsing \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__comm_ga979782eb5283175e921c600840dd3bdb}{data\+RX}} \mbox{[}4\mbox{]} = \{0,0,0,0\}
+\begin{DoxyCompactList}\small\item\em array to store parsed data \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__comm_gae5ff420b2a4921d8b63ea214e9e84347}{new\+Data}} = false
+\begin{DoxyCompactList}\small\item\em flag to indicate if new data is available \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__comm_gaeb687fb78071ec51db0291215e82548a}{prev\+Reset\+Enc}} = 0
+\begin{DoxyCompactList}\small\item\em previous reset encoder value \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{group__comm_gac31776b24afc4b0083dfbea60b98d158}\index{Serial Communication@{Serial Communication}!parseDataPID@{parseDataPID}}
+\index{parseDataPID@{parseDataPID}!Serial Communication@{Serial Communication}}
+\doxysubsubsection{\texorpdfstring{parseDataPID()}{parseDataPID()}}
+{\footnotesize\ttfamily \label{group__comm_gac31776b24afc4b0083dfbea60b98d158} 
+void parse\+Data\+PID (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Parses the received data into its individual parts.
+
+This function uses the {\ttfamily strtok()} function to split the received string into its individual parts. The parts are then converted to integers and stored in the {\ttfamily data\+RX\mbox{[}\mbox{]}} array. 
+
+\begin{DoxyNote}{Note}
+This function assumes that the received string is in the format\+: "{}$<$int1,int2,int3,int4$>$"{}
+\end{DoxyNote}
+Global Variables\+:
+\begin{DoxyItemize}
+\item {\ttfamily received\+Chars\mbox{[}\mbox{]}}\+: The array containing the received string.
+\item {\ttfamily temp\+Chars\mbox{[}\mbox{]}}\+: A temporary array used for parsing.
+\item {\ttfamily data\+RX\mbox{[}\mbox{]}}\+: The array where the parsed data is stored.
+\item {\ttfamily new\+Data}\+: A boolean flag indicating if new data is available.
+\end{DoxyItemize}
+
+Static Variables\+:
+\begin{DoxyItemize}
+\item {\ttfamily strtok\+Indx}\+: An index used by {\ttfamily strtok()} to keep track of the current position in the string.
+\end{DoxyItemize}
+
+\begin{DoxySeeAlso}{See also}
+strtok() 
+\end{DoxySeeAlso}
+\Hypertarget{group__comm_gac3b63746dc4a3ba4fb04e5845dae3de7}\index{Serial Communication@{Serial Communication}!recvWithStartEndMarkers@{recvWithStartEndMarkers}}
+\index{recvWithStartEndMarkers@{recvWithStartEndMarkers}!Serial Communication@{Serial Communication}}
+\doxysubsubsection{\texorpdfstring{recvWithStartEndMarkers()}{recvWithStartEndMarkers()}}
+{\footnotesize\ttfamily \label{group__comm_gac3b63746dc4a3ba4fb04e5845dae3de7} 
+void recv\+With\+Start\+End\+Markers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Receives a string of characters via Serial until a specific end marker is found.
+
+This function listens for characters coming in via Serial communication, assembling them into a string. The string assembly starts when a predefined start marker character is detected and ends when an end marker character is received. The assembled string is stored in {\ttfamily received\+Chars} and is made available once the end marker is detected. This function uses static variables to maintain state between calls. 
+
+\begin{DoxyNote}{Note}
+This function relies on global variables\+: {\ttfamily new\+Data}, a boolean indicating if new data has been fully received, and {\ttfamily received\+Chars}, an array where the assembled string is stored. It also uses {\ttfamily num\+Chars} to prevent buffer overflow, ensuring that the assembled string does not exceed the size of {\ttfamily received\+Chars}.
+
+The function is designed to be called repeatedly; it processes one character per call until the end marker is detected.
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+This function assumes that {\ttfamily Serial} has been initialized and is ready for reading.
+\end{DoxyWarning}
+Global Variables\+:
+\begin{DoxyItemize}
+\item {\ttfamily new\+Data}\+: Set to true when a complete string is received, until it is reset externally.
+\item {\ttfamily received\+Chars\mbox{[}\mbox{]}}\+: Array where the received string is stored.
+\item {\ttfamily num\+Chars}\+: The maximum size of {\ttfamily received\+Chars\mbox{[}\mbox{]}}.
+\end{DoxyItemize}
+
+Static Variables\+:
+\begin{DoxyItemize}
+\item {\ttfamily recv\+In\+Progress}\+: Tracks whether the reception of a string is currently in progress.
+\item {\ttfamily ndx}\+: The current index in {\ttfamily received\+Chars\mbox{[}\mbox{]}} where the next character will be stored.
+\end{DoxyItemize}
+
+\begin{DoxySeeAlso}{See also}
+Serial.\+read() 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{group__comm_ga979782eb5283175e921c600840dd3bdb}\index{Serial Communication@{Serial Communication}!dataRX@{dataRX}}
+\index{dataRX@{dataRX}!Serial Communication@{Serial Communication}}
+\doxysubsubsection{\texorpdfstring{dataRX}{dataRX}}
+{\footnotesize\ttfamily \label{group__comm_ga979782eb5283175e921c600840dd3bdb} 
+int data\+RX\mbox{[}4\mbox{]} = \{0,0,0,0\}}
+
+
+
+array to store parsed data 
+
+\Hypertarget{group__comm_gae5ff420b2a4921d8b63ea214e9e84347}\index{Serial Communication@{Serial Communication}!newData@{newData}}
+\index{newData@{newData}!Serial Communication@{Serial Communication}}
+\doxysubsubsection{\texorpdfstring{newData}{newData}}
+{\footnotesize\ttfamily \label{group__comm_gae5ff420b2a4921d8b63ea214e9e84347} 
+bool new\+Data = false}
+
+
+
+flag to indicate if new data is available 
+
+\Hypertarget{group__comm_gafe4adf197fc6ec15c9341446d8f4c466}\index{Serial Communication@{Serial Communication}!numChars@{numChars}}
+\index{numChars@{numChars}!Serial Communication@{Serial Communication}}
+\doxysubsubsection{\texorpdfstring{numChars}{numChars}}
+{\footnotesize\ttfamily \label{group__comm_gafe4adf197fc6ec15c9341446d8f4c466} 
+const byte num\+Chars = 32}
+
+
+
+number of characters in the array 
+
+\Hypertarget{group__comm_gaeb687fb78071ec51db0291215e82548a}\index{Serial Communication@{Serial Communication}!prevResetEnc@{prevResetEnc}}
+\index{prevResetEnc@{prevResetEnc}!Serial Communication@{Serial Communication}}
+\doxysubsubsection{\texorpdfstring{prevResetEnc}{prevResetEnc}}
+{\footnotesize\ttfamily \label{group__comm_gaeb687fb78071ec51db0291215e82548a} 
+int prev\+Reset\+Enc = 0}
+
+
+
+previous reset encoder value 
+
+\Hypertarget{group__comm_ga8972b9a588f5736ca4e5d8b6f08bb08b}\index{Serial Communication@{Serial Communication}!receivedChars@{receivedChars}}
+\index{receivedChars@{receivedChars}!Serial Communication@{Serial Communication}}
+\doxysubsubsection{\texorpdfstring{receivedChars}{receivedChars}}
+{\footnotesize\ttfamily \label{group__comm_ga8972b9a588f5736ca4e5d8b6f08bb08b} 
+char received\+Chars\mbox{[}\mbox{\hyperlink{group__comm_gafe4adf197fc6ec15c9341446d8f4c466}{num\+Chars}}\mbox{]}}
+
+
+
+array to store received data ~\newline
+ 
+
+\Hypertarget{group__comm_ga4d4e1ff6898c6a376081efc7fb39317e}\index{Serial Communication@{Serial Communication}!tempChars@{tempChars}}
+\index{tempChars@{tempChars}!Serial Communication@{Serial Communication}}
+\doxysubsubsection{\texorpdfstring{tempChars}{tempChars}}
+{\footnotesize\ttfamily \label{group__comm_ga4d4e1ff6898c6a376081efc7fb39317e} 
+char temp\+Chars\mbox{[}\mbox{\hyperlink{group__comm_gafe4adf197fc6ec15c9341446d8f4c466}{num\+Chars}}\mbox{]}}
+
+
+
+temporary array for use when parsing 
+

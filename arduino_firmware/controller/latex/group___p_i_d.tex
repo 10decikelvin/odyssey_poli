@@ -1,0 +1,429 @@
+\doxysection{PID Controller}
+\hypertarget{group___p_i_d}{}\label{group___p_i_d}\index{PID Controller@{PID Controller}}
+\doxysubsubsection*{Files}
+\begin{DoxyCompactItemize}
+\item 
+file \mbox{\hyperlink{lut_8h}{lut.\+h}}
+\begin{DoxyCompactList}\small\item\em Defines the lookup table for feedforward of PID.
+
+This header file contains the definition of a lookup table (LUT) used for the feedforward component of a PID controller. The LUT provides predefined output values for given input conditions, enhancing the PID controller\textquotesingle{}s response by compensating for known system behaviors in advance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmotor}{motor}}
+\begin{DoxyCompactList}\small\item\em Structure to represent motor parameters for PID feedforward.
+
+This structure is used within the lookup table to map specific motor speed (in ticks per second) to a corresponding PWM signal value and operational mode. It is a key component in implementing feedforward control in PID controllers for motors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{group___p_i_d_ga62c70c5a6cf15cba086967b591aa24a5}{low\+Pass\+Filter}} (float input, float prev, float alpha)
+\begin{DoxyCompactList}\small\item\em Applies a low-\/pass filter to the input signal.
+
+This function implements a simple low-\/pass filter, which is useful for smoothing out high-\/frequency noise in a signal. The filter is applied to the current input value based on the previous filtered value and a smoothing factor (alpha). \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{group___p_i_d_gadc5a7d24dac3e2bc260d8fe658f14a4a}{clamp\+Speed}} (float target, float input)
+\begin{DoxyCompactList}\small\item\em Clamps the input speed based on the target speed direction and limits.
+
+This function adjusts the input speed to ensure it is in the correct direction relative to the target speed and within the allowable range of speed values. If the target speed is positive, the input speed is clamped to a minimum of 0 and a maximum of MAX\+\_\+\+PWM. For a negative target speed, the input speed is clamped to a minimum of -\/MAX\+\_\+\+PWM and a maximum of 0. This ensures the input speed does not exceed the maximum allowed speed (MAX\+\_\+\+PWM) and is in the correct direction (positive or negative) as the target speed. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structmotor}{motor}} \mbox{\hyperlink{group___p_i_d_gadf94f33e6fd6391a4b81a2c480831883}{lookup\+FF}} (float desired\+Speed)
+\begin{DoxyCompactList}\small\item\em Finds the motor configuration closest to the desired speed.
+
+This function searches through a lookup table (lut) of motor configurations to find the one whose speed is closest to a desired speed. It iterates through the lut, calculating the absolute difference between the desired speed and each motor speed in the lut. The motor configuration with the smallest difference is considered the closest match and is returned. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___p_i_d_ga5a3e38dac62d7b725decda5e017b43d4}{PID}} (float desired\+\_\+L, float desired\+\_\+R)
+\begin{DoxyCompactList}\small\item\em Implements a PID controller for velocity control.
+
+This function calculates the PID control output based on the current and desired velocities for the left and right wheels. It computes the error between the desired and current velocities, updates the integral term, and calculates the derivative term. The PID control output is then determined using the proportional, integral, and derivative gains (Kp, Ki, Kd) along with a bias term and feedforward lookup table. The output is clamped to ensure it does not exceed the maximum speed and is set to 0 if the desired speed is below a minimum threshold. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___p_i_d_ga7d55ba8af63bf91aff70870b8a8b0dc7}{print\+Vel}} ()
+\begin{DoxyCompactList}\small\item\em prints the current and desired velocities for the left and right wheels. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group___p_i_d_ga71fd5ce49c52375d635eaf2b3beb4a0b}{print\+PID}} ()
+\begin{DoxyCompactList}\small\item\em prints the current and desired velocities for the left and right wheels along with PID values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const double \mbox{\hyperlink{group___p_i_d_gac6dd8cf133db4505d84f2144ea261181}{Kp}} = 0.\+9
+\begin{DoxyCompactList}\small\item\em Proportional constant. \end{DoxyCompactList}\item 
+const double \mbox{\hyperlink{group___p_i_d_gafe6fd874b1259cef0710b2c9d23bc087}{Ki}} = 0.\+8
+\begin{DoxyCompactList}\small\item\em Integral constant. \end{DoxyCompactList}\item 
+const double \mbox{\hyperlink{group___p_i_d_gac650d3f965d8f8ed28a7f45b96d4ebdd}{Kd}} = 0
+\begin{DoxyCompactList}\small\item\em Derivative constant \texorpdfstring{$\vert$}{|} Keep this 0. \end{DoxyCompactList}\item 
+const double \mbox{\hyperlink{group___p_i_d_gafe9a4fe2731eef6a9a32cc9c82792d8b}{bias}} = 0
+\begin{DoxyCompactList}\small\item\em Bias constant \texorpdfstring{$\vert$}{|} Keep this 0. \end{DoxyCompactList}\item 
+const long int \mbox{\hyperlink{group___p_i_d_gaeb53e5d7ad15d22a3219183cfd59fdf1}{PID\+\_\+\+TIME}} = 20000
+\begin{DoxyCompactList}\small\item\em μs \texorpdfstring{$\vert$}{|} PID Controller update time \end{DoxyCompactList}\item 
+const float \mbox{\hyperlink{group___p_i_d_ga68047a3abf39de1538bca06ac51058f7}{VELOCITY\+\_\+\+ALPHA}} = 0.\+1
+\begin{DoxyCompactList}\small\item\em alpha value for low pass filter for measured velocity \end{DoxyCompactList}\item 
+const float \mbox{\hyperlink{group___p_i_d_gaaec4b72389c9af7cf0b82d3e329bca4d}{SETPOINT\+\_\+\+ALPHA}} = 0.\+1
+\begin{DoxyCompactList}\small\item\em alpha value for low pass filter for target setpoint velocity \end{DoxyCompactList}\item 
+const float \mbox{\hyperlink{group___p_i_d_gab65dcdfa497af0f9bc4fc6f161dc5af3}{DEST\+\_\+\+THRESHOLD}} = 0.\+15
+\begin{DoxyCompactList}\small\item\em threshold for destination reached \texorpdfstring{$\vert$}{|} in metres \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{group___p_i_d_ga778e38aa889751afffa2dea6b803e67a}{dt}}
+\begin{DoxyCompactList}\small\item\em time difference for PID update \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group___p_i_d_gaffe00a5eba1dcb7db0a1850f869f4531}{e\+\_\+prev\+\_\+L}} = 0
+\begin{DoxyCompactList}\small\item\em Previous left speed error. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group___p_i_d_gad32714eb9086cedd91898321633406f2}{e\+\_\+prev\+\_\+R}} = 0
+\begin{DoxyCompactList}\small\item\em Previous right speed error. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group___p_i_d_ga44f97c1460cb92c4aedb1cb49e34c0f7}{integral\+\_\+L}} = 0
+\begin{DoxyCompactList}\small\item\em Integral term for left wheel. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{group___p_i_d_ga76a6b73b7f13cc4ef20a22f8b4dd17c3}{integral\+\_\+R}} = 0
+\begin{DoxyCompactList}\small\item\em Integral term for right wheel. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{group___p_i_d_ga215d5412ad03fcbc307b51fa2a787347}{output\+\_\+L}} = 0
+\begin{DoxyCompactList}\small\item\em Output for left wheel. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{group___p_i_d_ga1ac33a8cd7288d16b7a72b546211d29b}{output\+\_\+R}} = 0
+\begin{DoxyCompactList}\small\item\em Output for right wheel. \end{DoxyCompactList}\item 
+long long int \mbox{\hyperlink{group___p_i_d_gaf06d0c2f08f0474a441e0d217f0af0e7}{prev\+\_\+L}} = 0
+\begin{DoxyCompactList}\small\item\em Previous left encoder position. \end{DoxyCompactList}\item 
+long long int \mbox{\hyperlink{group___p_i_d_ga641f1c0e66a9ea43cdd23fd6df0c0192}{prev\+\_\+R}} = 0
+\begin{DoxyCompactList}\small\item\em Previous right encoder position. \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{group___p_i_d_gae99976c8cc89e247c29c4b87f7936e8c}{prev\+Time\+PID}} = 0
+\begin{DoxyCompactList}\small\item\em Previous time for PID update. \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{group___p_i_d_ga0656be73a6f50f63f3395041b8211055}{curr\+Time\+PID}} = 0
+\begin{DoxyCompactList}\small\item\em Current time for PID update. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group___p_i_d_ga6b10b3d9b26aae06b595655566768a11}{drive\+Data}} \mbox{[}3\mbox{]} = \{0,0,0\}
+\begin{DoxyCompactList}\small\item\em Array to store drive data for the motors. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structmotor}{motor}} \mbox{\hyperlink{group___p_i_d_gaf50181bc3f9d26013b19b987fa0d28a3}{lut}} \mbox{[}$\,$\mbox{]}
+\begin{DoxyCompactList}\small\item\em Lookup table array for PID feedforward control.
+
+This array of {\ttfamily motor} structures defines the lookup table for the feedforward component of the PID controller. Each entry maps a specific motor speed to a PWM value and operational mode, allowing for immediate adjustment based on the current speed requirement. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{group___p_i_d_gadc5a7d24dac3e2bc260d8fe658f14a4a}\index{PID Controller@{PID Controller}!clampSpeed@{clampSpeed}}
+\index{clampSpeed@{clampSpeed}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{clampSpeed()}{clampSpeed()}}
+{\footnotesize\ttfamily \label{group___p_i_d_gadc5a7d24dac3e2bc260d8fe658f14a4a} 
+float clamp\+Speed (\begin{DoxyParamCaption}\item[{float}]{target}{, }\item[{float}]{input}{}\end{DoxyParamCaption})}
+
+
+
+Clamps the input speed based on the target speed direction and limits.
+
+This function adjusts the input speed to ensure it is in the correct direction relative to the target speed and within the allowable range of speed values. If the target speed is positive, the input speed is clamped to a minimum of 0 and a maximum of MAX\+\_\+\+PWM. For a negative target speed, the input speed is clamped to a minimum of -\/MAX\+\_\+\+PWM and a maximum of 0. This ensures the input speed does not exceed the maximum allowed speed (MAX\+\_\+\+PWM) and is in the correct direction (positive or negative) as the target speed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & The target speed, which determines the allowed direction of the input speed. \\
+\hline
+{\em input} & The current input speed to be clamped based on the target speed and MAX\+\_\+\+PWM. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The clamped speed, adjusted to be within the allowable range and direction. 
+\end{DoxyReturn}
+\Hypertarget{group___p_i_d_gadf94f33e6fd6391a4b81a2c480831883}\index{PID Controller@{PID Controller}!lookupFF@{lookupFF}}
+\index{lookupFF@{lookupFF}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{lookupFF()}{lookupFF()}}
+{\footnotesize\ttfamily \label{group___p_i_d_gadf94f33e6fd6391a4b81a2c480831883} 
+\mbox{\hyperlink{structmotor}{motor}} lookup\+FF (\begin{DoxyParamCaption}\item[{float}]{desired\+Speed}{}\end{DoxyParamCaption})}
+
+
+
+Finds the motor configuration closest to the desired speed.
+
+This function searches through a lookup table (lut) of motor configurations to find the one whose speed is closest to a desired speed. It iterates through the lut, calculating the absolute difference between the desired speed and each motor speed in the lut. The motor configuration with the smallest difference is considered the closest match and is returned. 
+
+\begin{DoxyNote}{Note}
+The LUT array must be defined and contain motor structures with speed values. 
+
+This function assumes that the LUT is sorted in ascending order of speed values. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em desired\+Speed} & The target speed to match. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The motor configuration from the lut that is closest to the desired speed. 
+\end{DoxyReturn}
+\Hypertarget{group___p_i_d_ga62c70c5a6cf15cba086967b591aa24a5}\index{PID Controller@{PID Controller}!lowPassFilter@{lowPassFilter}}
+\index{lowPassFilter@{lowPassFilter}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{lowPassFilter()}{lowPassFilter()}}
+{\footnotesize\ttfamily \label{group___p_i_d_ga62c70c5a6cf15cba086967b591aa24a5} 
+float low\+Pass\+Filter (\begin{DoxyParamCaption}\item[{float}]{input}{, }\item[{float}]{prev}{, }\item[{float}]{alpha}{}\end{DoxyParamCaption})}
+
+
+
+Applies a low-\/pass filter to the input signal.
+
+This function implements a simple low-\/pass filter, which is useful for smoothing out high-\/frequency noise in a signal. The filter is applied to the current input value based on the previous filtered value and a smoothing factor (alpha). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & The current raw input value to be filtered. \\
+\hline
+{\em prev} & The previous filtered value. \\
+\hline
+{\em alpha} & The smoothing factor used in the filter, between 0 and 1. A higher alpha value gives more weight to the current input, while a lower alpha value gives more weight to the previous values, resulting in stronger smoothing. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The filtered value. 
+\end{DoxyReturn}
+\Hypertarget{group___p_i_d_ga5a3e38dac62d7b725decda5e017b43d4}\index{PID Controller@{PID Controller}!PID@{PID}}
+\index{PID@{PID}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{PID()}{PID()}}
+{\footnotesize\ttfamily \label{group___p_i_d_ga5a3e38dac62d7b725decda5e017b43d4} 
+void PID (\begin{DoxyParamCaption}\item[{float}]{desired\+\_\+L}{, }\item[{float}]{desired\+\_\+R}{}\end{DoxyParamCaption})}
+
+
+
+Implements a PID controller for velocity control.
+
+This function calculates the PID control output based on the current and desired velocities for the left and right wheels. It computes the error between the desired and current velocities, updates the integral term, and calculates the derivative term. The PID control output is then determined using the proportional, integral, and derivative gains (Kp, Ki, Kd) along with a bias term and feedforward lookup table. The output is clamped to ensure it does not exceed the maximum speed and is set to 0 if the desired speed is below a minimum threshold. 
+
+\begin{DoxyNote}{Note}
+This function requires the {\ttfamily \doxylink{group___p_i_d_gadf94f33e6fd6391a4b81a2c480831883}{lookup\+FF()}} function to find the feedforward values for the desired speeds. 
+
+The PID constants (Kp, Ki, Kd) and bias term can be adjusted to tune the controller\textquotesingle{}s performance. 
+
+The function uses a low-\/pass filter to smooth the measured velocities and the desired setpoints.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em desired\+\_\+L} & The desired velocity for the left wheel. \\
+\hline
+{\em desired\+\_\+R} & The desired velocity for the right wheel.\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxylink{group___p_i_d_gadf94f33e6fd6391a4b81a2c480831883}{lookup\+FF()} 
+
+\doxylink{group___p_i_d_ga62c70c5a6cf15cba086967b591aa24a5}{low\+Pass\+Filter()} 
+\end{DoxySeeAlso}
+\Hypertarget{group___p_i_d_ga71fd5ce49c52375d635eaf2b3beb4a0b}\index{PID Controller@{PID Controller}!printPID@{printPID}}
+\index{printPID@{printPID}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{printPID()}{printPID()}}
+{\footnotesize\ttfamily \label{group___p_i_d_ga71fd5ce49c52375d635eaf2b3beb4a0b} 
+void print\+PID (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+prints the current and desired velocities for the left and right wheels along with PID values. 
+
+\Hypertarget{group___p_i_d_ga7d55ba8af63bf91aff70870b8a8b0dc7}\index{PID Controller@{PID Controller}!printVel@{printVel}}
+\index{printVel@{printVel}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{printVel()}{printVel()}}
+{\footnotesize\ttfamily \label{group___p_i_d_ga7d55ba8af63bf91aff70870b8a8b0dc7} 
+void print\+Vel (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+prints the current and desired velocities for the left and right wheels. 
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{group___p_i_d_gafe9a4fe2731eef6a9a32cc9c82792d8b}\index{PID Controller@{PID Controller}!bias@{bias}}
+\index{bias@{bias}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{bias}{bias}}
+{\footnotesize\ttfamily \label{group___p_i_d_gafe9a4fe2731eef6a9a32cc9c82792d8b} 
+const double bias = 0}
+
+
+
+Bias constant \texorpdfstring{$\vert$}{|} Keep this 0. 
+
+\Hypertarget{group___p_i_d_ga0656be73a6f50f63f3395041b8211055}\index{PID Controller@{PID Controller}!currTimePID@{currTimePID}}
+\index{currTimePID@{currTimePID}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{currTimePID}{currTimePID}}
+{\footnotesize\ttfamily \label{group___p_i_d_ga0656be73a6f50f63f3395041b8211055} 
+unsigned long curr\+Time\+PID = 0}
+
+
+
+Current time for PID update. 
+
+\Hypertarget{group___p_i_d_gab65dcdfa497af0f9bc4fc6f161dc5af3}\index{PID Controller@{PID Controller}!DEST\_THRESHOLD@{DEST\_THRESHOLD}}
+\index{DEST\_THRESHOLD@{DEST\_THRESHOLD}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{DEST\_THRESHOLD}{DEST\_THRESHOLD}}
+{\footnotesize\ttfamily \label{group___p_i_d_gab65dcdfa497af0f9bc4fc6f161dc5af3} 
+const float DEST\+\_\+\+THRESHOLD = 0.\+15}
+
+
+
+threshold for destination reached \texorpdfstring{$\vert$}{|} in metres 
+
+\Hypertarget{group___p_i_d_ga6b10b3d9b26aae06b595655566768a11}\index{PID Controller@{PID Controller}!driveData@{driveData}}
+\index{driveData@{driveData}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{driveData}{driveData}}
+{\footnotesize\ttfamily \label{group___p_i_d_ga6b10b3d9b26aae06b595655566768a11} 
+int drive\+Data\mbox{[}3\mbox{]} = \{0,0,0\}}
+
+
+
+Array to store drive data for the motors. 
+
+\Hypertarget{group___p_i_d_ga778e38aa889751afffa2dea6b803e67a}\index{PID Controller@{PID Controller}!dt@{dt}}
+\index{dt@{dt}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{dt}{dt}}
+{\footnotesize\ttfamily \label{group___p_i_d_ga778e38aa889751afffa2dea6b803e67a} 
+float dt}
+
+
+
+time difference for PID update 
+
+\Hypertarget{group___p_i_d_gaffe00a5eba1dcb7db0a1850f869f4531}\index{PID Controller@{PID Controller}!e\_prev\_L@{e\_prev\_L}}
+\index{e\_prev\_L@{e\_prev\_L}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{e\_prev\_L}{e\_prev\_L}}
+{\footnotesize\ttfamily \label{group___p_i_d_gaffe00a5eba1dcb7db0a1850f869f4531} 
+double e\+\_\+prev\+\_\+L = 0}
+
+
+
+Previous left speed error. 
+
+\Hypertarget{group___p_i_d_gad32714eb9086cedd91898321633406f2}\index{PID Controller@{PID Controller}!e\_prev\_R@{e\_prev\_R}}
+\index{e\_prev\_R@{e\_prev\_R}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{e\_prev\_R}{e\_prev\_R}}
+{\footnotesize\ttfamily \label{group___p_i_d_gad32714eb9086cedd91898321633406f2} 
+double e\+\_\+prev\+\_\+R = 0}
+
+
+
+Previous right speed error. 
+
+\Hypertarget{group___p_i_d_ga44f97c1460cb92c4aedb1cb49e34c0f7}\index{PID Controller@{PID Controller}!integral\_L@{integral\_L}}
+\index{integral\_L@{integral\_L}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{integral\_L}{integral\_L}}
+{\footnotesize\ttfamily \label{group___p_i_d_ga44f97c1460cb92c4aedb1cb49e34c0f7} 
+double integral\+\_\+L = 0}
+
+
+
+Integral term for left wheel. 
+
+\Hypertarget{group___p_i_d_ga76a6b73b7f13cc4ef20a22f8b4dd17c3}\index{PID Controller@{PID Controller}!integral\_R@{integral\_R}}
+\index{integral\_R@{integral\_R}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{integral\_R}{integral\_R}}
+{\footnotesize\ttfamily \label{group___p_i_d_ga76a6b73b7f13cc4ef20a22f8b4dd17c3} 
+double integral\+\_\+R = 0}
+
+
+
+Integral term for right wheel. 
+
+\Hypertarget{group___p_i_d_gac650d3f965d8f8ed28a7f45b96d4ebdd}\index{PID Controller@{PID Controller}!Kd@{Kd}}
+\index{Kd@{Kd}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{Kd}{Kd}}
+{\footnotesize\ttfamily \label{group___p_i_d_gac650d3f965d8f8ed28a7f45b96d4ebdd} 
+const double Kd = 0}
+
+
+
+Derivative constant \texorpdfstring{$\vert$}{|} Keep this 0. 
+
+\Hypertarget{group___p_i_d_gafe6fd874b1259cef0710b2c9d23bc087}\index{PID Controller@{PID Controller}!Ki@{Ki}}
+\index{Ki@{Ki}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{Ki}{Ki}}
+{\footnotesize\ttfamily \label{group___p_i_d_gafe6fd874b1259cef0710b2c9d23bc087} 
+const double Ki = 0.\+8}
+
+
+
+Integral constant. 
+
+\Hypertarget{group___p_i_d_gac6dd8cf133db4505d84f2144ea261181}\index{PID Controller@{PID Controller}!Kp@{Kp}}
+\index{Kp@{Kp}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{Kp}{Kp}}
+{\footnotesize\ttfamily \label{group___p_i_d_gac6dd8cf133db4505d84f2144ea261181} 
+const double Kp = 0.\+9}
+
+
+
+Proportional constant. 
+
+\Hypertarget{group___p_i_d_gaf50181bc3f9d26013b19b987fa0d28a3}\index{PID Controller@{PID Controller}!lut@{lut}}
+\index{lut@{lut}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{lut}{lut}}
+{\footnotesize\ttfamily \label{group___p_i_d_gaf50181bc3f9d26013b19b987fa0d28a3} 
+\mbox{\hyperlink{structmotor}{motor}} lut\mbox{[}$\,$\mbox{]}}
+
+
+
+Lookup table array for PID feedforward control.
+
+This array of {\ttfamily motor} structures defines the lookup table for the feedforward component of the PID controller. Each entry maps a specific motor speed to a PWM value and operational mode, allowing for immediate adjustment based on the current speed requirement. 
+
+\Hypertarget{group___p_i_d_ga215d5412ad03fcbc307b51fa2a787347}\index{PID Controller@{PID Controller}!output\_L@{output\_L}}
+\index{output\_L@{output\_L}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{output\_L}{output\_L}}
+{\footnotesize\ttfamily \label{group___p_i_d_ga215d5412ad03fcbc307b51fa2a787347} 
+float output\+\_\+L = 0}
+
+
+
+Output for left wheel. 
+
+\Hypertarget{group___p_i_d_ga1ac33a8cd7288d16b7a72b546211d29b}\index{PID Controller@{PID Controller}!output\_R@{output\_R}}
+\index{output\_R@{output\_R}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{output\_R}{output\_R}}
+{\footnotesize\ttfamily \label{group___p_i_d_ga1ac33a8cd7288d16b7a72b546211d29b} 
+float output\+\_\+R = 0}
+
+
+
+Output for right wheel. 
+
+\Hypertarget{group___p_i_d_gaeb53e5d7ad15d22a3219183cfd59fdf1}\index{PID Controller@{PID Controller}!PID\_TIME@{PID\_TIME}}
+\index{PID\_TIME@{PID\_TIME}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{PID\_TIME}{PID\_TIME}}
+{\footnotesize\ttfamily \label{group___p_i_d_gaeb53e5d7ad15d22a3219183cfd59fdf1} 
+const long int PID\+\_\+\+TIME = 20000}
+
+
+
+μs \texorpdfstring{$\vert$}{|} PID Controller update time 
+
+\Hypertarget{group___p_i_d_gaf06d0c2f08f0474a441e0d217f0af0e7}\index{PID Controller@{PID Controller}!prev\_L@{prev\_L}}
+\index{prev\_L@{prev\_L}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{prev\_L}{prev\_L}}
+{\footnotesize\ttfamily \label{group___p_i_d_gaf06d0c2f08f0474a441e0d217f0af0e7} 
+long long int prev\+\_\+L = 0}
+
+
+
+Previous left encoder position. 
+
+\Hypertarget{group___p_i_d_ga641f1c0e66a9ea43cdd23fd6df0c0192}\index{PID Controller@{PID Controller}!prev\_R@{prev\_R}}
+\index{prev\_R@{prev\_R}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{prev\_R}{prev\_R}}
+{\footnotesize\ttfamily \label{group___p_i_d_ga641f1c0e66a9ea43cdd23fd6df0c0192} 
+long long int prev\+\_\+R = 0}
+
+
+
+Previous right encoder position. 
+
+\Hypertarget{group___p_i_d_gae99976c8cc89e247c29c4b87f7936e8c}\index{PID Controller@{PID Controller}!prevTimePID@{prevTimePID}}
+\index{prevTimePID@{prevTimePID}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{prevTimePID}{prevTimePID}}
+{\footnotesize\ttfamily \label{group___p_i_d_gae99976c8cc89e247c29c4b87f7936e8c} 
+unsigned long prev\+Time\+PID = 0}
+
+
+
+Previous time for PID update. 
+
+\Hypertarget{group___p_i_d_gaaec4b72389c9af7cf0b82d3e329bca4d}\index{PID Controller@{PID Controller}!SETPOINT\_ALPHA@{SETPOINT\_ALPHA}}
+\index{SETPOINT\_ALPHA@{SETPOINT\_ALPHA}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{SETPOINT\_ALPHA}{SETPOINT\_ALPHA}}
+{\footnotesize\ttfamily \label{group___p_i_d_gaaec4b72389c9af7cf0b82d3e329bca4d} 
+const float SETPOINT\+\_\+\+ALPHA = 0.\+1}
+
+
+
+alpha value for low pass filter for target setpoint velocity 
+
+\Hypertarget{group___p_i_d_ga68047a3abf39de1538bca06ac51058f7}\index{PID Controller@{PID Controller}!VELOCITY\_ALPHA@{VELOCITY\_ALPHA}}
+\index{VELOCITY\_ALPHA@{VELOCITY\_ALPHA}!PID Controller@{PID Controller}}
+\doxysubsubsection{\texorpdfstring{VELOCITY\_ALPHA}{VELOCITY\_ALPHA}}
+{\footnotesize\ttfamily \label{group___p_i_d_ga68047a3abf39de1538bca06ac51058f7} 
+const float VELOCITY\+\_\+\+ALPHA = 0.\+1}
+
+
+
+alpha value for low pass filter for measured velocity 
+

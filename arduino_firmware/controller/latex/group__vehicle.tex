@@ -1,0 +1,120 @@
+\doxysection{Vehicle}
+\hypertarget{group__vehicle}{}\label{group__vehicle}\index{Vehicle@{Vehicle}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__vehicle_gae6c4fabc1cec8cd44fcc846cf0236be2}{drive}} (int data\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Controls the driving mechanism of a robot based on input commands.
+
+This function interprets an array of integers to control the driving mechanism of a robot, adjusting the speed and direction of its motors. The input array contains values for left and right motor PWM (Pulse Width Modulation) signals and a mode selector. The function supports three modes\+: normal operation, off, and brake. In normal operation, the PWM values directly control the motor speeds, allowing for forward and reverse motion. The off mode stops all motor activity, and the brake mode actively halts the motors, which can cause voltage spikes and should be used cautiously. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const float \mbox{\hyperlink{group__vehicle_ga8d5b205f2e28fb66216cf87138631f8f}{WHEEL\+\_\+\+RATIO}} = 555
+\begin{DoxyCompactList}\small\item\em encoder ticks per metre (\texorpdfstring{$\sim$}{\string~}0.00188496m/t) \end{DoxyCompactList}\item 
+const float \mbox{\hyperlink{group__vehicle_gada93907bffc882942b0f22747b5933d0}{WHEELBASE}} = 0.\+36
+\begin{DoxyCompactList}\small\item\em distance between the two wheels in metres \end{DoxyCompactList}\item 
+const float \mbox{\hyperlink{group__vehicle_gac0fe1b863c35522a47ec379972fd6efc}{HALF\+\_\+\+VEHICLE\+\_\+\+WIDTH}} = \mbox{\hyperlink{group__vehicle_gada93907bffc882942b0f22747b5933d0}{WHEELBASE}} / 2
+\begin{DoxyCompactList}\small\item\em half the wheelbase, in metres \end{DoxyCompactList}\item 
+const float \mbox{\hyperlink{group__vehicle_ga5904146976da789cdfcbca51d567906d}{MAX\+\_\+\+SPEED}} = 1300 / \mbox{\hyperlink{group__vehicle_ga8d5b205f2e28fb66216cf87138631f8f}{WHEEL\+\_\+\+RATIO}}
+\begin{DoxyCompactList}\small\item\em max speed in ticks per second \end{DoxyCompactList}\item 
+const int \mbox{\hyperlink{group__vehicle_gaf1f5ecc4bcc249991e33470d6864db5a}{MAX\+\_\+\+PWM}} = 250
+\begin{DoxyCompactList}\small\item\em max PWM value for the motors \end{DoxyCompactList}\item 
+const int \mbox{\hyperlink{group__vehicle_gaa7dc52880b41eb022f995991d2815519}{MIN\+\_\+\+SPEED}} = 4
+\begin{DoxyCompactList}\small\item\em minimum speed to move the robot in ticks per second (4 t/s \texorpdfstring{$\sim$}{\string~}= 8mm/s) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{group__vehicle_gae6c4fabc1cec8cd44fcc846cf0236be2}\index{Vehicle@{Vehicle}!drive@{drive}}
+\index{drive@{drive}!Vehicle@{Vehicle}}
+\doxysubsubsection{\texorpdfstring{drive()}{drive()}}
+{\footnotesize\ttfamily \label{group__vehicle_gae6c4fabc1cec8cd44fcc846cf0236be2} 
+void drive (\begin{DoxyParamCaption}\item[{int}]{data}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+
+
+Controls the driving mechanism of a robot based on input commands.
+
+This function interprets an array of integers to control the driving mechanism of a robot, adjusting the speed and direction of its motors. The input array contains values for left and right motor PWM (Pulse Width Modulation) signals and a mode selector. The function supports three modes\+: normal operation, off, and brake. In normal operation, the PWM values directly control the motor speeds, allowing for forward and reverse motion. The off mode stops all motor activity, and the brake mode actively halts the motors, which can cause voltage spikes and should be used cautiously. 
+
+\begin{DoxyWarning}{Warning}
+The brake mode can cause voltage spikes and should be used with caution to avoid damaging the motors or other components.
+\end{DoxyWarning}
+The function uses {\ttfamily digital\+Write\+Fast} to set the direction of the motors and {\ttfamily analog\+Write} to control the speed. It ensures that the motors are stopped if both PWM values are zero, regardless of the selected mode. This function is designed for robots with differential drive systems, where the speed and direction of each side (left and right) can be controlled independently.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & An array of integers where\+:
+\begin{DoxyItemize}
+\item data\mbox{[}0\mbox{]} is the PWM value for the left motor (positive for forward, negative for reverse \texorpdfstring{$\vert$}{|} range\+: -\/255 to 255),
+\item data\mbox{[}1\mbox{]} is the PWM value for the right motor (positive for forward, negative for reverse \texorpdfstring{$\vert$}{|} range\+: -\/255 to 255),
+\item data\mbox{[}2\mbox{]} is the mode selector (0 for normal operation, 1 for off, 2 for brake). 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{group__vehicle_gac0fe1b863c35522a47ec379972fd6efc}\index{Vehicle@{Vehicle}!HALF\_VEHICLE\_WIDTH@{HALF\_VEHICLE\_WIDTH}}
+\index{HALF\_VEHICLE\_WIDTH@{HALF\_VEHICLE\_WIDTH}!Vehicle@{Vehicle}}
+\doxysubsubsection{\texorpdfstring{HALF\_VEHICLE\_WIDTH}{HALF\_VEHICLE\_WIDTH}}
+{\footnotesize\ttfamily \label{group__vehicle_gac0fe1b863c35522a47ec379972fd6efc} 
+const float HALF\+\_\+\+VEHICLE\+\_\+\+WIDTH = \mbox{\hyperlink{group__vehicle_gada93907bffc882942b0f22747b5933d0}{WHEELBASE}} / 2}
+
+
+
+half the wheelbase, in metres 
+
+\Hypertarget{group__vehicle_gaf1f5ecc4bcc249991e33470d6864db5a}\index{Vehicle@{Vehicle}!MAX\_PWM@{MAX\_PWM}}
+\index{MAX\_PWM@{MAX\_PWM}!Vehicle@{Vehicle}}
+\doxysubsubsection{\texorpdfstring{MAX\_PWM}{MAX\_PWM}}
+{\footnotesize\ttfamily \label{group__vehicle_gaf1f5ecc4bcc249991e33470d6864db5a} 
+const int MAX\+\_\+\+PWM = 250}
+
+
+
+max PWM value for the motors 
+
+\Hypertarget{group__vehicle_ga5904146976da789cdfcbca51d567906d}\index{Vehicle@{Vehicle}!MAX\_SPEED@{MAX\_SPEED}}
+\index{MAX\_SPEED@{MAX\_SPEED}!Vehicle@{Vehicle}}
+\doxysubsubsection{\texorpdfstring{MAX\_SPEED}{MAX\_SPEED}}
+{\footnotesize\ttfamily \label{group__vehicle_ga5904146976da789cdfcbca51d567906d} 
+const float MAX\+\_\+\+SPEED = 1300 / \mbox{\hyperlink{group__vehicle_ga8d5b205f2e28fb66216cf87138631f8f}{WHEEL\+\_\+\+RATIO}}}
+
+
+
+max speed in ticks per second 
+
+\Hypertarget{group__vehicle_gaa7dc52880b41eb022f995991d2815519}\index{Vehicle@{Vehicle}!MIN\_SPEED@{MIN\_SPEED}}
+\index{MIN\_SPEED@{MIN\_SPEED}!Vehicle@{Vehicle}}
+\doxysubsubsection{\texorpdfstring{MIN\_SPEED}{MIN\_SPEED}}
+{\footnotesize\ttfamily \label{group__vehicle_gaa7dc52880b41eb022f995991d2815519} 
+const int MIN\+\_\+\+SPEED = 4}
+
+
+
+minimum speed to move the robot in ticks per second (4 t/s \texorpdfstring{$\sim$}{\string~}= 8mm/s) 
+
+\Hypertarget{group__vehicle_ga8d5b205f2e28fb66216cf87138631f8f}\index{Vehicle@{Vehicle}!WHEEL\_RATIO@{WHEEL\_RATIO}}
+\index{WHEEL\_RATIO@{WHEEL\_RATIO}!Vehicle@{Vehicle}}
+\doxysubsubsection{\texorpdfstring{WHEEL\_RATIO}{WHEEL\_RATIO}}
+{\footnotesize\ttfamily \label{group__vehicle_ga8d5b205f2e28fb66216cf87138631f8f} 
+const float WHEEL\+\_\+\+RATIO = 555}
+
+
+
+encoder ticks per metre (\texorpdfstring{$\sim$}{\string~}0.00188496m/t) 
+
+\Hypertarget{group__vehicle_gada93907bffc882942b0f22747b5933d0}\index{Vehicle@{Vehicle}!WHEELBASE@{WHEELBASE}}
+\index{WHEELBASE@{WHEELBASE}!Vehicle@{Vehicle}}
+\doxysubsubsection{\texorpdfstring{WHEELBASE}{WHEELBASE}}
+{\footnotesize\ttfamily \label{group__vehicle_gada93907bffc882942b0f22747b5933d0} 
+const float WHEELBASE = 0.\+36}
+
+
+
+distance between the two wheels in metres 
+
